@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>太陽系散歩</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet'>
+    <style>
+      #map{
+        position:fixed;
+        top:0;right:0;bottom:0;left:0;
+        z-index:-1;
+      }
+    </style>
+    <script>
+      const dist_data=[["水星",580,10],["金星",1085,24],["地球",1500,25.5],["火星",2286,13.5],
+                       ["木星",7804,286],["土星",14332,240],["天王星",28828,102],["海王星",45166,100]];
+      const chec=dist_data[Symbol.iterator]();
+      let des=chec.next();
+      let start;let mymap;
+      function setup(sc,pos=[35,135]){
+        mymap = L.map('map');
+         //マップタイルの定義
+         var Gmap=L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
+           attribution:"<a href='https://developers.google.com/maps/documentation' target='_blank'>Google Map</a>",
+         }).addTo(mymap);
+         var chiriinn=L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", {
+          attribution:"<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>",
+});
+         var OSMtile = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+           attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank">©OpenStreetMap</a> contributors'
+         }); 
+         var HOTtile = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+           attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank">©OpenStreetMap</a> contributors, Tiles: <a href="http://map.hotosm.org/" target="_blank">©HOT</a>'});
+         var OTMtile = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+           attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank">©OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org/" target="_blank">SRTM</a> | map style: <a href="https://opentopomap.org/" target="_blank">©OpenTopoMap</a>'});
+         var ewi =L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+});
+         L.control.layers({
+           "GoogleMap":Gmap,
+           "国土地理院":chiriinn,
+           "OpenStreetMap": OSMtile,
+            "Humanitarian map style": HOTtile,
+            "OpenTopoMap": OTMtile,
+            "航空写真":ewi
+         }).addTo(mymap);
+
+         mymap.addControl(new L.Control.Fullscreen());
+        
+         mymap.on('click', function(e) {
+           scale=Number(prompt("中心位置を変更します。縮尺を何億分の1にするか入力してください。\nおすすめ:2or20",scale));
+           if(scale){
+             mymap.remove();
+             setup(scale,e.latlng);
+           }
+         });
+
+         mymap.setView(pos, 13);
+         L.marker(pos).addTo(mymap).bindPopup("太陽 直径"+14/sc+"m");
+
+         for(dt of dist_data){
+           let circle = L.circle(pos, {radius: dt[1]/sc,fill:false,color:"black",weight:1}).addTo(mymap);
+         }
+      }
+      let previous;
+      let scale=Number(prompt("縮尺は何億分の一ですか?(〇億分の1の部分のみ入力してください。)\nおすすめ:2or20"));
+      while(!scale){scale=Number(prompt("数字が無効です。「〇億分の1」の〇部分のみ入力してください。\nおすすめ:2or20"));}
+      while(!(confirm("地球まで"+1500/scale+"m,土星まで"+14332/scale+"mで作成します。よろしいですか?"))){
+      scale=Number(prompt("縮尺は何億分の1か、もう一度入力してください。\nおすすめ:2or20"));}
+      navigator.geolocation.getCurrentPosition(pos=>{
+        start=previous=[pos.coords.latitude,pos.coords.longitude];
+        setup(scale,previous);
+      },()=>{setup(scale);});
+
+      function distance([lat1, lng1, lat2, lng2]) {
+        lat1 *= Math.PI / 180;
+        lng1 *= Math.PI / 180;
+        lat2 *= Math.PI / 180;
+        lng2 *= Math.PI / 180;
+        return 6371 * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) + Math.sin(lat1) * Math.sin(lat2));
+      }
+      navigator.geolocation.watchPosition(e=>{
+        L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
+        const dist=distance(start+[e.coords.latitude,e.coords.longitude]);
+
+        while(des.value[1]<=dist){if(des.value[1]<=dist){
+          L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/sc+"cm");
+          des=chec.next();
+        }}
+      });
+    </script>
+  </head>
+  <body>
+    <div id="map"></div><!--
+    <dialog id="top" open>
+      <h1>太陽系散歩</h1>
+      <p>ver0.1.0</p>
+      <select id="scale">
+         <option selected>スケールを選択</option>
+         <option value="2">2億分の1</option>
+         <option value="10">10億分の1</option>
+         <option value="20">20億分の1</option>
+      </select>
+    </dialog>
+    <script>
+        document.getElementById("scale").onchange=e=>{if(e.target.value){
+          document.getElementById("top").close();
+          const scale=parseInt(e.target.value);
+          navigator.geolocation.getCurrentPosition(pos=>{setup(scale,[pos.coords.latitude,pos.coords.longitude]);},()=>{setup(scale);});
+        }};
+    </script> -->
+  </body>
+</html>
