@@ -85,7 +85,7 @@
       navigator.geolocation.watchPosition(e=>{
         L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
         const dist=distance(start+[e.coords.latitude,e.coords.longitude]);
-        alert(des.value[1]/scale+"\n"+dist);
+        alert(start+[e.coords.latitude,e.coords.longitude]);
         while(des.value[1]/scale<=dist){
           alert(des.value[0]+"到達! 直径"+des.value[2]/scale+"cm");
           L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/sc+"cm");
