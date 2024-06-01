@@ -15,8 +15,8 @@
       }
     </style>
     <script>
-      const dist_data=[["水星",580,10],["金星",1085,24],["地球",1500,25.5],["火星",2286,13.5],
-                       ["木星",7804,286],["土星",14332,240],["天王星",28828,102],["海王星",45166,100]];
+      const dist_data=[["水星",580,5],["金星",1085,12],["地球",1500,13],["火星",2286,7],
+                       ["木星",7804,143],["土星",14332,120],["天王星",28828,51],["海王星",45166,50]];
       const chec=dist_data[Symbol.iterator]();
       let des=chec.next();
       let start;let mymap;
@@ -25,13 +25,13 @@
          //マップタイルの定義
          var Gmap=L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
            attribution:"<a href='https://developers.google.com/maps/documentation' target='_blank'>Google Map</a>",
-         }).addTo(mymap);
+         });
          var chiriinn=L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", {
           attribution:"<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>",
 });
          var OSMtile = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
            attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank">©OpenStreetMap</a> contributors'
-         }); 
+         }).addTo(mymap); 
          var HOTtile = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
            attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank">©OpenStreetMap</a> contributors, Tiles: <a href="http://map.hotosm.org/" target="_blank">©HOT</a>'});
          var OTMtile = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
