@@ -31,11 +31,9 @@
 });
          var OSMtile = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
            attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank">©OpenStreetMap</a> contributors'
-         }).addTo(mymap); 
+         }); 
          var HOTtile = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-           attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank">©OpenStreetMap</a> contributors, Tiles: <a href="http://map.hotosm.org/" target="_blank">©HOT</a>'});
-         var OTMtile = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-           attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank">©OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org/" target="_blank">SRTM</a> | map style: <a href="https://opentopomap.org/" target="_blank">©OpenTopoMap</a>'});
+           attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank">©OpenStreetMap</a> contributors, Tiles: <a href="http://map.hotosm.org/" target="_blank">©HOT</a>'}).addTo(mymap);
          var ewi =L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
 });
@@ -44,13 +42,12 @@
            "国土地理院":chiriinn,
            "OpenStreetMap": OSMtile,
             "Humanitarian map style": HOTtile,
-            "OpenTopoMap": OTMtile,
             "航空写真":ewi
          }).addTo(mymap);
 
          mymap.addControl(new L.Control.Fullscreen());
         
-         mymap.on('click', function(e) {
+         mymap.on('dblclick', function(e) {
            scale=Number(prompt("中心位置を変更します。縮尺を何億分の1にするか入力してください。\nおすすめ:2or20",scale));
            if(scale){
              mymap.remove();
@@ -75,7 +72,7 @@
         setup(scale,previous);
       },()=>{setup(scale);});
 
-      function distance([[lat1, lng1], [lat2, lng2]]) {
+      function distance([lat1, lng1], [lat2, lng2]) {
         lat1 *= Math.PI / 180;
         lng1 *= Math.PI / 180;
         lat2 *= Math.PI / 180;
@@ -83,7 +80,7 @@
         return 6371 * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) + Math.sin(lat1) * Math.sin(lat2)) * 1000;
       }
       navigator.geolocation.watchPosition(e=>{
-        L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
+        L.polyline(previous,[e.coords.latitude,e.coords.longitude]).addTo(mymap);
         while(des.value[1]/scale<=distance([start,[e.coords.latitude,e.coords.longitude]])){
           alert(des.value[0]+"到達! 直径"+des.value[2]/scale+"cm");
           L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
