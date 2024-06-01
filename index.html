@@ -72,7 +72,7 @@
         setup(scale,previous);
       },()=>{setup(scale);});
 
-      function distance([lat1, lng1], [lat2, lng2]) {
+      function distance([[lat1, lng1], [lat2, lng2]]) {
         lat1 *= Math.PI / 180;
         lng1 *= Math.PI / 180;
         lat2 *= Math.PI / 180;
@@ -80,7 +80,7 @@
         return 6371 * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) + Math.sin(lat1) * Math.sin(lat2)) * 1000;
       }
       navigator.geolocation.watchPosition(e=>{
-        L.polyline(previous,[e.coords.latitude,e.coords.longitude]).addTo(mymap);
+        L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
         while(des.value[1]/scale<=distance([start,[e.coords.latitude,e.coords.longitude]])){
           alert(des.value[0]+"到達! 直径"+des.value[2]/scale+"cm");
           L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
