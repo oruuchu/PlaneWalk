@@ -64,7 +64,7 @@
       }
       let previous;
       if(location.search.includes("plug=135ejstm")){
-        dist_data.splice(3,0,["リュウグウ",1800,0]);
+        dist_data.splice(3,0,["リュウグウ(平均)",1800,0]);
         dist_data.push(["冥王星(平均)",59250,2.5],["ヘリオポーズ(太陽圏界面)",150000,0],["ボイジャー1号",244000,0]);
       }
       let scale=Number(prompt("縮尺は何億分の一ですか?(〇億分の1の部分のみ入力してください。)\nおすすめ:2or20"));
@@ -87,6 +87,7 @@
         L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
         previous=[e.coords.latitude,e.coords.longitude];
         while(des.value[1]/scale<=distance([start,previous])){
+          new Notification(des.value[0]+"に到着")
           alert(des.value[0]+"到達! 直径"+des.value[2]/scale+"cm");
           L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
           des=chec.next();
