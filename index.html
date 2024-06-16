@@ -87,7 +87,6 @@
         L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
         previous=[e.coords.latitude,e.coords.longitude];
         while(des.value[1]/scale<=distance([start,previous])){
-          new Notification(des.value[0]+"に到着");
           alert(des.value[0]+"到達! 直径"+des.value[2]/scale+"cm");
           L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
           des=chec.next();
@@ -96,23 +95,5 @@
     </script>
   </head>
   <body>
-    <div id="map"></div><!--
-    <dialog id="top" open>
-      <h1>太陽系散歩</h1>
-      <p>ver0.1.0</p>
-      <select id="scale">
-         <option selected>スケールを選択</option>
-         <option value="2">2億分の1</option>
-         <option value="10">10億分の1</option>
-         <option value="20">20億分の1</option>
-      </select>
-    </dialog>
-    <script>
-        document.getElementById("scale").onchange=e=>{if(e.target.value){
-          document.getElementById("top").close();
-          const scale=parseInt(e.target.value);
-          navigator.geolocation.getCurrentPosition(pos=>{setup(scale,[pos.coords.latitude,pos.coords.longitude]);},()=>{setup(scale);});
-        }};
-    </script> -->
-  </body>
+    <div id="map"></div></body>
 </html>
