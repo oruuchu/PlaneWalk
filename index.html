@@ -39,13 +39,14 @@
          var ewi =L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
 });
-         L.control.layers({
+         const ctrl = L.control.layers({
            "GoogleMap":Gmap,
            "国土地理院":chiriinn,
            "OpenStreetMap": OSMtile,
             "Humanitarian map style": HOTtile,
             "航空写真":ewi
-         }).addTo(mymap);
+         });
+         ctrl.addTo(mymap);
 
          mymap.addControl(new L.Control.Fullscreen());
 
@@ -53,7 +54,7 @@
           const lay=prompt("xyzレイヤーのURLを入力してください");
           const lays={};
           lays[lay]=L.tileLayer(lay);
-          L.control.layers(lays).addTo(mymap);
+          ctrl.addLayer(lays);
         }).addTo( mymap );
         
          mymap.on('dblclick', function(e) {
