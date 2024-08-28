@@ -54,7 +54,7 @@
           const lay=prompt("xyzレイヤーのURLを入力してください");
           const lays={};
           lays[lay]=L.tileLayer(lay);
-          ctrl.addLayer(lays);
+          ctrl.addBaseLayer(lay, "OpenTopoMap");
         }).addTo( mymap );
         
          mymap.on('dblclick', function(e) {
