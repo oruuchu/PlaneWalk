@@ -49,12 +49,6 @@
          }).addTo(mymap);
 
          mymap.addControl(new L.Control.Fullscreen());
-
-        L.easyButton('+', function(btn, map){
-          customap=prompt("xyzレイヤーのURLを入力してください",customap);
-          console.log(L.tileLayer(customap));
-          L.tileLayer(customap).addTo(mymap);
-        }).addTo( mymap );
         
          mymap.on('dblclick', function(e) {
            scale=Number(prompt("中心位置を変更します。縮尺を何億分の1にするか入力してください。\nおすすめ:2or20",scale));
