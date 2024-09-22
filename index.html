@@ -52,7 +52,7 @@
 
         L.easyButton('+', function(btn, map){
           customap=prompt("xyzレイヤーのURLを入力してください",customap);
-          L.tileLayer(lay).addTo(mymap);
+          L.tileLayer(customap).addTo(mymap);
         }).addTo( mymap );
         
          mymap.on('dblclick', function(e) {
