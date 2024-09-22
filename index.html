@@ -23,7 +23,7 @@
       let des=chec.next();
       let start;let mymap;
       let customap = "";
-      function setup(sc,pos=[35,135]){/*
+      function setup(sc,pos=[35,135]){
         mymap = L.map('map');
          //マップタイルの定義
          var Gmap=L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
@@ -46,12 +46,13 @@
            "OpenStreetMap": OSMtile,
             "Humanitarian map style": HOTtile,
             "航空写真":ewi
-         }).addTo(mymap);*/
+         }).addTo(mymap);
 
          mymap.addControl(new L.Control.Fullscreen());
 
         L.easyButton('+', function(btn, map){
           customap=prompt("xyzレイヤーのURLを入力してください",customap);
+          console.log(L.tileLayer(customap));
           L.tileLayer(customap).addTo(mymap);
         }).addTo( mymap );
         
