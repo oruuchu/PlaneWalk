@@ -22,6 +22,7 @@
       const chec=dist_data[Symbol.iterator]();
       let des=chec.next();
       let start;let mymap;
+      let customap = "";
       function setup(sc,pos=[35,135]){
         mymap = L.map('map');
          //マップタイルの定義
@@ -50,10 +51,8 @@
          mymap.addControl(new L.Control.Fullscreen());
 
         L.easyButton('+', function(btn, map){
-          const lay=prompt("xyzレイヤーのURLを入力してください");
-          const lays={};
-          lays[lay]=L.tileLayer(lay);
-          ctrl.addBaseLayer(lay, "OpenTopoMap");
+          customap=prompt("xyzレイヤーのURLを入力してください",customap);
+          L.tileLayer(lay).addTo(mymap);
         }).addTo( mymap );
         
          mymap.on('dblclick', function(e) {
