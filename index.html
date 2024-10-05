@@ -63,10 +63,6 @@
          });
       }}
       let previous;
-      if(location.search.includes("plug=135ejstm")){
-        dist_data.splice(3,0,["リュウグウ(平均)",1800,0]);
-        dist_data.push(["冥王星(平均)",59250,2.5],["ヘリオポーズ(太陽圏界面)",150000,0],["ボイジャー1号",244000,0]);
-      }
       
       function distance([[lat1, lng1], [lat2, lng2]]) {
         lat1 *= Math.PI / 180;
@@ -79,6 +75,11 @@
       window.onload=window.onhashchange=function() {
         const menu=document.getElementById("menu");
         if(!location.hash){menu.showModal();}else if(menu.open){menu.close();}
+        if(location.search.includes("plug=135ejstm")){
+          dist_data.splice(3,0,["リュウグウ(平均)",1800,0]);
+          dist_data.push(["冥王星(平均)",59250,2.5],["ヘリオポーズ(太陽圏界面)",150000,0],["ボイジャー1号",244000,0]);
+        }
+        
         if(location.hash=="#simu"){setup([35,135]);}else if(location.hash){
           navigator.geolocation.getCurrentPosition(pos=>{
             start=previous=[pos.coords.latitude,pos.coords.longitude];
