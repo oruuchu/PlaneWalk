@@ -97,7 +97,7 @@
   </head>
   <body>
     <div id="map"></div>
-    <dialog style="z-index:100;" onload="if(!location.hash){this.openModal();}">
+    <dialog style="z-index:100;" onload="if(!location.hash){console.log(this);this.openModal();}">
       <p>モード選択</p>
       <a href="#simu">シミュレーションモード</a>
       <a href="#game-2">ゲームモード&lpar;2億分の1&rpar;</a>
