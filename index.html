@@ -103,7 +103,7 @@
         const menu=document.getElementById("menu");
         if(!location.hash){
           menu.showModal();
-          document.getElementById("map").innerHTML="";
+          if(mymap){mymap.remove();}
         }else if(menu.open){menu.close();}
         
         if(location.hash=="#simu"){setup([35,135]);}else if(location.hash){
