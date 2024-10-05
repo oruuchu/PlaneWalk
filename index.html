@@ -26,7 +26,7 @@
       let start;let mymap;
       let scale= location.hash=="#game-2"? 2:20;
       let customap = "";
-      function setup(){//マップのセットアップ(マップ作成・レイヤー設定)
+      function setup(pos){//マップのセットアップ(マップ作成・レイヤー設定)
         mymap = L.map('map');
          //マップタイルの定義
          var Gmap=L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
@@ -50,6 +50,7 @@
             "Humanitarian map style": HOTtile,
             "航空写真":ewi
          }).addTo(mymap);
+        mymap.setView(pos, 13);
 
          mymap.addControl(new L.Control.Fullscreen());
         
@@ -57,9 +58,8 @@
            scale=Number(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください\n例:1000万分の一→0.1",scale));
            while(!scale){scale=Number(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。\n例:1000万分の一→0.1"));}
            mymap.remove();
-           setup();
+           setup(e.latlng);
            for(dt of dist_data){let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);}
-           mymap.setView(pos, 13);
            L.marker(e.latlng).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
          });
       }}
@@ -81,8 +81,8 @@
         if(location.hash=="#simu"){setup();}else if(location.hash){
           navigator.geolocation.getCurrentPosition(pos=>{
             start=previous=[pos.coords.latitude,pos.coords.longitude];
-            setup();
-          },()=>{setup(scale);});
+            setup(start);
+          },()=>{setup();});
   
           navigator.geolocation.watchPosition(e=>{
             L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
