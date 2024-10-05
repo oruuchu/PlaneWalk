@@ -82,6 +82,7 @@
           navigator.geolocation.getCurrentPosition(pos=>{
             start=previous=[pos.coords.latitude,pos.coords.longitude];
             setup(start);
+            L.marker(start).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
           },()=>{location.hash=confirm("位置情報へのアクセスを許可してください。シミュレーションモードに切り変えますか?")? "#simu":location.hash});
   
           navigator.geolocation.watchPosition(e=>{
@@ -95,7 +96,7 @@
             }
           });
         }
-      });
+      };
     </script>
   </head>
   <body>
