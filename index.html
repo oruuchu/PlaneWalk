@@ -82,7 +82,7 @@
           navigator.geolocation.getCurrentPosition(pos=>{
             start=previous=[pos.coords.latitude,pos.coords.longitude];
             setup(start);
-          },()=>{location.hash=confirm("位置情報へのアクセスを許可してください。シミュレーションモードに切り変えますか"?)? "#simu":location.hash});
+          },()=>{location.hash=confirm("位置情報へのアクセスを許可してください。シミュレーションモードに切り変えますか?")? "#simu":location.hash});
   
           navigator.geolocation.watchPosition(e=>{
             L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
