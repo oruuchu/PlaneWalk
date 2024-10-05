@@ -23,8 +23,8 @@
       if(location.search.includes("plug=135ejstm")){
         dist_data.splice(3,0,["リュウグウ(平均)",1800,0]);
         dist_data.push(["冥王星(平均)",59250,2.5],["ヘリオポーズ(太陽圏界面)",150000,0],["ボイジャー1号",244000,0]);
+        console.log(dist_data);
       }
-      console.log(dist_data);
       const chec=dist_data[Symbol.iterator]();
       let des=chec.next();
       let start;let mymap;
