@@ -24,6 +24,7 @@
       let des=chec.next();
       let start;let mymap;
       let scale= location.hash=="#game-2"? 2:20;
+      console.log(scale);
       let customap = "";
       function setup(){//マップのセットアップ(マップ作成・レイヤー設定)
         mymap = L.map('map');
@@ -97,7 +98,7 @@
   </head>
   <body>
     <div id="map"></div>
-    <dialog onload="if(!location.hash){this.showModal();}">
+    <dialog>
       <p>モード選択</p>
       <a href="#simu">シミュレーションモード</a>
       <a href="#game-2">ゲームモード&lpar;2億分の1&rpar;</a>
