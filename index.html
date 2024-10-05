@@ -18,6 +18,7 @@
     </style>
     <script>
       if(location.hash=="#"){location.hash=="";}
+      if(!location.hash){document.getElementById("menu").openModal();}
       const dist_data=[["水星",580,5],["金星",1085,12],["地球",1500,13],["火星",2286,7],
                        ["木星",7804,143],["土星",14332,120],["天王星",28828,51],["海王星",45166,50]];
       const chec=dist_data[Symbol.iterator]();
@@ -99,7 +100,7 @@
   </head>
   <body>
     <div id="map"></div>
-    <dialog open>
+    <dialog id="menu">
       <p>モード選択</p>
       <a href="#simu">シミュレーションモード</a>
       <a href="#game-2">ゲームモード&lpar;2億分の1&rpar;</a>
