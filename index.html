@@ -15,6 +15,27 @@
         top:0;right:0;bottom:0;left:0;
         z-index:-1;
       }
+
+      a{
+        display:block;
+        color:#fff;
+        font-weight:bold;
+        text-decoration:none;
+        padding:0.5em;
+        border:1px solid;
+        border-radius:2px;
+
+        background:#000;
+        border-color:#000;
+
+        overflow: hidden;
+        position: relative;
+        z-index: 2;
+      }
+      a:hover{
+        color:#000;
+        background-color:#fff;
+      }
     </style>
     <script>
       if(location.hash=="#"){location.hash=="";}
@@ -78,7 +99,10 @@
 
       window.onload=window.onhashchange=function() {
         const menu=document.getElementById("menu");
-        if(!location.hash){menu.showModal();}else if(menu.open){menu.close();}
+        if(!location.hash){
+          menu.showModal();
+          document.getElementById("map").innerHTML="";
+        }else if(menu.open){menu.close();}
         
         if(location.hash=="#simu"){setup([35,135]);}else if(location.hash){
           navigator.geolocation.getCurrentPosition(pos=>{
@@ -104,7 +128,8 @@
   <body>
     <div id="map"></div>
     <dialog id="menu">
-      <p>モード選択</p>
+      <h1>太陽系散歩</h1>
+      <small>ver 1.9.0</small>
       <a href="#simu">シミュレーションモード</a>
       <a href="#game-2">ゲームモード&lpar;2億分の1&rpar;</a>
       <a href="#game-20">ゲームモード&lpar;20億分の1&rpar;</a>
