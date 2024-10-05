@@ -20,6 +20,10 @@
       if(location.hash=="#"){location.hash=="";}
       const dist_data=[["水星",580,5],["金星",1085,12],["地球",1500,13],["火星",2286,7],
                        ["木星",7804,143],["土星",14332,120],["天王星",28828,51],["海王星",45166,50]];
+      if(location.search.includes("plug=135ejstm")){
+        dist_data.splice(3,0,["リュウグウ(平均)",1800,0]);
+        dist_data.push(["冥王星(平均)",59250,2.5],["ヘリオポーズ(太陽圏界面)",150000,0],["ボイジャー1号",244000,0]);
+      }
       const chec=dist_data[Symbol.iterator]();
       let des=chec.next();
       let start;let mymap;
@@ -75,10 +79,6 @@
       window.onload=window.onhashchange=function() {
         const menu=document.getElementById("menu");
         if(!location.hash){menu.showModal();}else if(menu.open){menu.close();}
-        if(location.search.includes("plug=135ejstm")){
-          dist_data.splice(3,0,["リュウグウ(平均)",1800,0]);
-          dist_data.push(["冥王星(平均)",59250,2.5],["ヘリオポーズ(太陽圏界面)",150000,0],["ボイジャー1号",244000,0]);
-        }
         
         if(location.hash=="#simu"){setup([35,135]);}else if(location.hash){
           navigator.geolocation.getCurrentPosition(pos=>{
