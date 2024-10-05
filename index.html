@@ -76,22 +76,24 @@
         return 6371 * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) + Math.sin(lat1) * Math.sin(lat2)) * 1000;
       }
 
-      if(location.hash=="#simu"){console.log(location.hash);setup();}else if(location.hash){
-        navigator.geolocation.getCurrentPosition(pos=>{
-          start=previous=[pos.coords.latitude,pos.coords.longitude];
-          setup();
-        },()=>{setup(scale);});
-
-        navigator.geolocation.watchPosition(e=>{
-          L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
-          previous=[e.coords.latitude,e.coords.longitude];
-          while(des.value[1]/scale<=distance([start,previous])){
-            alert(des.value[0]+"到達! 直径"+des.value[2]/scale+"cm");
-            L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
-            L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
-            des=chec.next();
-          }
-        });
+      windows.onDOMContentLoaded(function(){
+        if(location.hash=="#simu"){setup();}else if(location.hash){
+          navigator.geolocation.getCurrentPosition(pos=>{
+            start=previous=[pos.coords.latitude,pos.coords.longitude];
+            setup();
+          },()=>{setup(scale);});
+  
+          navigator.geolocation.watchPosition(e=>{
+            L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
+            previous=[e.coords.latitude,e.coords.longitude];
+             while(des.value[1]/scale<=distance([start,previous])){
+               alert(des.value[0]+"到達! 直径"+des.value[2]/scale+"cm");
+               L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
+               L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
+               des=chec.next();
+            }
+          });
+        }
       }
     </script>
   </head>
