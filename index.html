@@ -101,6 +101,7 @@
       }
 
       window.onload=window.onhashchange=function() {
+        const notification = new Notification("Check!");
         const menu=document.getElementById("menu");
         if(!location.hash){
           menu.showModal();
