@@ -117,7 +117,7 @@
         
         if(location.hash=="#simu"){setup([35,135]);}else if(location.hash){
           Notification.requestPermission();
-          const notification = new Notification("太陽系散歩へようこそ!!現在地から、歩いてみてください。",{body:"太陽系の第八惑星で、1864年に発見された惑星である。太陽系の惑星の中では最も外側を約165年かけて公転しいる。\n現在発見されている衛星数は16個であり、有名な衛星にトリトンがある。\n海王星の表面はメタンの赤の光を吸収し、青の光を散乱させる性質によって青く光っているように見えてる。"});
+          const notification = new Notification("太陽系散歩へようこそ!!現在地から、歩いてみてください。");
           
           navigator.geolocation.getCurrentPosition(pos=>{
             start=previous=[pos.coords.latitude,pos.coords.longitude];
