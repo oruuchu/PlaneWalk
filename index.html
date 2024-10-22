@@ -2,7 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>太陽系散歩</title>
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
@@ -42,6 +44,7 @@
     </style>
     <script>
       if(location.hash=="#"){location.hash=="";}
+      //惑星名,(1億分の一での)距離,大きさ,解説
       const dist_data=[["水星",580,5,"太陽に一番近い惑星。\nクレーターには、主に芸術家の名前がつけられており、日本人でいうと、ヤマダ(山田耕筰)や、リキュウ(千利休)といったクレーターがある。\n自転が非常にゆっくりで、1日の長さが176日。\n太陽からの重力の関係で、探査機が到達するのは非常に難しい。"],
                        ["金星",1085,12,""],
                        ["地球",1500,13,""],
@@ -116,6 +119,7 @@
         }else if(menu.open){menu.close();}
         
         if(location.hash=="#simu"){setup([35,135]);}else if(location.hash){
+          alert("ゲームモードでは、通知とGPSを使用します。通知とGPSの許可をお願いします。\n※アプリを閉じると、追跡はとまりますのでご安心ください");
           Notification.requestPermission();
           const notification = new Notification("太陽系散歩へようこそ!!現在地から、歩いてみてください。");
           
