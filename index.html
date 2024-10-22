@@ -133,7 +133,7 @@
             L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
             previous=[e.coords.latitude,e.coords.longitude];
              while(des.value[1]/scale<=distance([start,previous])){
-               Push.create(des.value[0]+"到達! 直径"+des.value[3]/scale+"cm",{body:des.value[2]});
+               Push.create(des.value[0]+"到達! 直径"+des.value[2]/scale+"cm",{body:des.value[3]});
                L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
                L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
                des=chec.next();
