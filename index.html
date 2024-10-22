@@ -99,8 +99,15 @@
            setup(e.latlng);
            for(dt of dist_data){let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);}
            L.marker(e.latlng).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
-         });
-      }}
+         });}else if(location.hash){
+           navigator.serviceWorker.register("worker.js");
+           navigator.serviceWorker.ready.then(e => {
+             Notification.requestPermission();
+             window.worker=e;
+             e.showNotification("太陽系散歩へようこそ!!現在地から、歩いてみてください。");
+           }
+         }
+      }
       let previous;
       
       function distance([[lat1, lng1], [lat2, lng2]]) {
@@ -110,7 +117,7 @@
         lng2 *= Math.PI / 180;
         return 6371 * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) + Math.sin(lat1) * Math.sin(lat2)) * 1000;
       }
-
+      
       window.onload=window.onhashchange=function() {
         const menu=document.getElementById("menu");
         if(!location.hash){
