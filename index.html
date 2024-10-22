@@ -122,7 +122,7 @@
         if(location.hash=="#simu"){setup([35,135]);}else if(location.hash){
           alert("ゲームモードでは、通知とGPSを使用します。通知とGPSの許可をお願いします。\n※アプリを閉じると、追跡はとまりますのでご安心ください");
           Push.Permission.request();//Notification.requestPermission();
-          Push.create("太陽系散歩へようこそ!!現在地から、歩いてみてください。");
+          Push.create("太陽系散歩へようこそ!!現在地から、歩いてみてください。",{onError: function(e){alert("error!!")}});
           
           navigator.geolocation.getCurrentPosition(pos=>{
             start=previous=[pos.coords.latitude,pos.coords.longitude];
