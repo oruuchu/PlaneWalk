@@ -121,8 +121,7 @@
         
         if(location.hash=="#simu"){setup([35,135]);}else if(location.hash){
           alert("ゲームモードでは、通知とGPSを使用します。通知とGPSの許可をお願いします。\n※アプリを閉じると、追跡はとまりますのでご安心ください");
-          Push.Permission.request();//Notification.requestPermission();
-          Push.create("太陽系散歩へようこそ!!現在地から、歩いてみてください。",{onError: function(e){alert("error!!")}});
+          Push.create("太陽系散歩へようこそ!!現在地から、歩いてみてください。");
           
           navigator.geolocation.getCurrentPosition(pos=>{
             start=previous=[pos.coords.latitude,pos.coords.longitude];
@@ -134,7 +133,7 @@
             L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
             previous=[e.coords.latitude,e.coords.longitude];
              while(des.value[1]/scale<=distance([start,previous])){
-               const notification = new Notification(des.value[0]+"到達! 直径"+des.value[3]/scale+"cm",{body:value[2]});
+               Push.create(des.value[0]+"到達! 直径"+des.value[3]/scale+"cm",{body:des.value[2]});
                L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
                L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
                des=chec.next();
