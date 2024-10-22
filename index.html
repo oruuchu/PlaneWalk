@@ -103,8 +103,8 @@
            navigator.serviceWorker.register("worker.js");
            navigator.serviceWorker.ready.then(e => {
              Notification.requestPermission();
-             window.noti=e.showNotification;
-             window.noti("太陽系散歩へようこそ!!現在地から、歩いてみてください。");
+             window.noti=e;
+             window.noti.showNotification("太陽系散歩へようこそ!!現在地から、歩いてみてください。");
            });
          }
       }
@@ -139,7 +139,7 @@
             L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
             previous=[e.coords.latitude,e.coords.longitude];
              while(des.value[1]/scale<=distance([start,previous])){
-               window.noti(des.value[0]+"到達! 直径"+des.value[2]/scale+"cm",{body:des.value[3]});
+               window.noti.showNotification(des.value[0]+"到達! 直径"+des.value[2]/scale+"cm",{body:des.value[3]});
                L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
                L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
                des=chec.next();
