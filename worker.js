@@ -6,11 +6,11 @@ const assets = [
   "/",
   "/index.html",
   "https://unpkg.com/leaflet@1.3.1/dist/leaflet.js",
-  "/192.png",
+  "/192.png"/*,
   'https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js',
   'https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css',
   "https://cdn.jsdelivr.net/npm/leaflet-easybutton@2.4.0/src/easy-button.min.js",
-  "https://cdn.jsdelivr.net/npm/leaflet-easybutton@2.4.0/src/easy-button.min.css"
+  "https://cdn.jsdelivr.net/npm/leaflet-easybutton@2.4.0/src/easy-button.min.css"*/
 ];
 
 /**
