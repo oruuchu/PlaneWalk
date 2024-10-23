@@ -2,7 +2,7 @@
     "name": "太陽系散歩",
     "display": "standalone",
     "id": "SolarSystemWalk", 
-    "start_url": "/index.html",
+    "start_url": "/PlaneWalk/index.html",
     "icons": [
         {
             "src": "192.png",
