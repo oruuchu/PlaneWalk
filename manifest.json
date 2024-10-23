@@ -1,0 +1,14 @@
+{
+    "name": "太陽系散歩",
+    "display": "fullscreen",
+    "id": "SolarSystemWalk", 
+    "scope": "/",
+    "start_url": "/index.html",
+    "icons": [
+        {
+            "src": "icon256x256.png",
+            "type": "image/png",
+            "sizes": "256x256"
+        }
+    ]
+}
