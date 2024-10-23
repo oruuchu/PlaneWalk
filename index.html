@@ -66,7 +66,7 @@
       let start;let mymap;
       let scale= location.hash=="#game-2"? 2:20;
       let customap = "";
-      function setup(pos){//マップのセットアップ(マップ作成・レイヤー設定)
+      function setup(pos,sca=13){//マップのセットアップ(マップ作成・レイヤー設定)
         mymap = L.map('map');
          //マップタイルの定義
          var Gmap=L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
@@ -90,7 +90,7 @@
             "Humanitarian map style": HOTtile,
             "航空写真":ewi
          }).addTo(mymap);
-        mymap.setView(pos, 13);
+        mymap.setView(pos, sca);
 
          mymap.addControl(new L.Control.Fullscreen());
         
@@ -122,18 +122,23 @@
       
       window.onload=window.onhashchange=function() {
         const menu=document.getElementById("menu");
+        const simu_st=document.getElementById("simu_st");
         if(!location.hash){
           menu.showModal();
           document.getElementById("map").innerHTML="";
           if(mymap){mymap.remove();}
         }else if(menu.open){menu.close();}
         
-        if(location.hash=="#simu"){setup([35,135]);}else if(location.hash){
+        if(location.hash=="#simu"){
+          setup([35,135],3);
+          simu_st.show();
+        }else if(location.hash){
           alert("ゲームモードでは、通知とGPSを使用します。通知とGPSの許可をお願いします。\n※アプリを閉じると、追跡はとまりますのでご安心ください");
           
           navigator.geolocation.getCurrentPosition(pos=>{
             start=previous=[pos.coords.latitude,pos.coords.longitude];
             setup(start);
+            if(simu_st.open){simu_st.close();}
             L.marker(start).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
           },()=>{location.hash=confirm("位置情報へのアクセスを許可してください。シミュレーションモードに切り変えますか?")? "#simu":location.hash});
   
@@ -157,8 +162,9 @@
       <h1>太陽系散歩</h1>
       <small>ver 1.9.1</small>
       <a href="#simu">シミュレーションモード</a>
-      <a href="#game-2">ゲームモード&lpar;2億分の1&rpar;(20kmコース)</a>
-      <a href="#game-20">ゲームモード&lpar;20億分の1&rpar;(2kmコース)</a>
+      <a href="#game-2">ゲームモード&lpar;2億分の1/約20kmコース&rpar;</a>
+      <a href="#game-20">ゲームモード&lpar;20億分の1/約2kmコース&rpar;</a>
     </dialog>
+    <dialog id="simu_st">ダブルクリックで中心地点を指定</dialog>
   </body>
 </html>
