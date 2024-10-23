@@ -1,8 +1,8 @@
 {
     "name": "太陽系散歩",
     "display": "standalone",
-    "id": "SolarSystemWalk", 
-    "start_url": "/PlaneWalk/index.html",
+    "id": "PlaneWalk", 
+    "start_url": "/PlaneWalk/",
     "icons": [
         {
             "src": "192.png",
