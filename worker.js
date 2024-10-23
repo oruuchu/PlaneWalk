@@ -10,7 +10,8 @@ const assets = [
   'https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js',
   'https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css',
   "https://cdn.jsdelivr.net/npm/leaflet-easybutton@2.4.0/src/easy-button.min.js",
-  "https://cdn.jsdelivr.net/npm/leaflet-easybutton@2.4.0/src/easy-button.min.css"
+  "https://cdn.jsdelivr.net/npm/leaflet-easybutton@2.4.0/src/easy-button.min.css",
+  'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
 ];
 
 /**
