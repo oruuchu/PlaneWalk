@@ -5,7 +5,8 @@ const CACHE_NAME = APP_NAME + "_" + VERSION;
 const assets = [
   "/",
   "/index.html",
-  "/192.png"/*,
+  "/192.png",
+  "/512.png"/*,
   "https://unpkg.com/leaflet@1.3.1/dist/leaflet.js",
   'https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js',
   'https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css',
