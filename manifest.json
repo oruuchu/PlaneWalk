@@ -1,5 +1,5 @@
 {
-    "name": "Solar System Walk",
+    "name": "太陽系散歩",
     "display": "standalone",
     "id": "SolarSystemWalk", 
     "start_url": "/index.html",
