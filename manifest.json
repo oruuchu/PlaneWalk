@@ -6,9 +6,9 @@
     "start_url": "/index.html",
     "icons": [
         {
-            "src": "icon256x256.png",
+            "src": "favicon.ico",
             "type": "image/png",
-            "sizes": "256x256"
+            "sizes": "12x12 24x24 36x36 48x48"
         }
     ]
 }
