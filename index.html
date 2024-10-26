@@ -124,8 +124,8 @@
         lng2 *= Math.PI / 180;
         return 6371 * Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng2 - lng1) + Math.sin(lat1) * Math.sin(lat2)) * 1000;
       }
-      
-      window.onload=window.onhashchange=function() {
+      window.onhashchange=location.reload;
+      window.onload=function() {
         const menu=document.getElementById("menu");
         const simu_st=document.getElementById("simu_st");
         if(!location.hash){
@@ -138,10 +138,10 @@
           setup([35,135],7);
           simu_st.show();
         }else if(location.hash){
-          alert("ゲームモードでは、通知とGPS、Service Workerを使用します。許可をお願いします。\n※アプリを閉じると、追跡はとまりますのでご安心ください");
-          
+          alert("ゲームモードでは、通知とGPS、Service Workerを使用しますので、ブラウザの設定をご確認ください。\nまた、iPhoneで通知機能をご利用いただくには、下のメニューより、「ホーム画面に追加」が必要です。\n※アプリを閉じると、追跡はとまりますのでご安心ください");
+             
           navigator.geolocation.getCurrentPosition(pos=>{
-            start=previous=[pos.coords.latitude,pos.coords.longitude];
+          start=previous=[pos.coords.latitude,pos.coords.longitude];
             setup(start);
             L.marker(start).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
           },()=>{location.hash=confirm("位置情報へのアクセスを許可してください。シミュレーションモードに切り変えますか?")? "#simu":location.hash});
@@ -149,11 +149,11 @@
           navigator.geolocation.watchPosition(e=>{
             L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
             previous=[e.coords.latitude,e.coords.longitude];
-             while(des.value[1]/scale<=distance([start,previous])){
-               window.noti.showNotification(`${des.value[0]}到達!スタート地点から${des.value[1]/scale}m 直径${des.value[2]/scale}cm`,{body:des.value[3]});
-               L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
-               L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
-               des=chec.next();
+            while(des.value[1]/scale<=distance([start,previous])){
+              window.noti.showNotification(`${des.value[0]}到達!スタート地点から${des.value[1]/scale}m 直径${des.value[2]/scale}cm`,{body:des.value[3]});
+              L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
+              L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
+              des=chec.next();
             }
           });
         }
