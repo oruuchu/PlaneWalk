@@ -150,11 +150,11 @@
             L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
             previous=[e.coords.latitude,e.coords.longitude];
             while(des.value[1]/scale<=distance([start,previous])){
-              console.log(des.value);
               window.noti.showNotification(`${des.value[0]}到達!スタート地点から${des.value[1]/scale}m 直径${des.value[2]/scale}cm`,{body:des.value[3]});
               L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
               L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
               des=chec.next();
+              if(des.done){break;}
             }
           });
         }
@@ -165,7 +165,7 @@
     <div id="map"></div>
     <dialog id="menu">
       <h1>太陽系散歩</h1>
-      <small>ver 2.0.1 制作協力:ほしとも学生部</small>
+      <small>ver 2.0.2 制作協力:ほしとも学生部</small>
       <a href="#simu">シミュレーションモード</a>
       <a href="#game-2">ゲームモード&lpar;2億分の1/約20kmコース&rpar;</a>
       <a href="#game-20">ゲームモード&lpar;20億分の1/約2kmコース&rpar;</a>
