@@ -149,6 +149,7 @@
           navigator.geolocation.watchPosition(e=>{
             L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
             previous=[e.coords.latitude,e.coords.longitude];
+            console.log(des.value);
             while(des.value[1]/scale<=distance([start,previous])){
               window.noti.showNotification(`${des.value[0]}到達!スタート地点から${des.value[1]/scale}m 直径${des.value[2]/scale}cm`,{body:des.value[3]});
               L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
