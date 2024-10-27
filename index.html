@@ -61,12 +61,6 @@
                        ["天王星",28828,51,'太陽系で最も寒い惑星。\nギリシャ神話における天空神である"Uranus"（ウラヌス）から名付けられた。\n自転軸が約98°傾いており、横倒しの状態で公転している。青みががって見える理由として、天王星を覆っているガスの層に含まれるメタンが赤い光を吸収することが挙げられる。\n表面温度は-200°以下にもなり、昼夜の気温差はほとんどない。加えて、公転周期が約84年ということから、極点では昼と夜がそれぞれ約42年間続く。'],
                        ["海王星",45166,50,"太陽系の第八惑星で、1864年に発見された惑星である。太陽系の惑星の中では最も外側を約165年かけて公転しいる。\n現在発見されている衛星数は16個であり、有名な衛星にトリトンがある。\n海王星の表面はメタンの赤の光を吸収し、青の光を散乱させる性質によって青く光っているように見えてる。"]
                       ];
-      if(location.search.includes("plug=135ejstm")){
-        dist_data.splice(3,0,["リュウグウ(平均)",1800,0,""]);
-        dist_data.push(["冥王星(平均)",59250,2.5,""],["ヘリオポーズ(太陽圏界面)",150000,0,""],["ボイジャー1号",244000,0,""]);
-      }
-      const chec=dist_data[Symbol.iterator]();
-      let des=chec.next();
       let start;let mymap;
       let scale= location.hash=="#game-2"? 2:20;
       let customap = "";
@@ -138,6 +132,9 @@
           setup([35,135],7);
           simu_st.show();
         }else if(location.hash){
+          dist_data.splice(3,0,["リュウグウ(平均)",1800,0,""]);
+          dist_data.push(["冥王星(平均)",59250,2.5,""],["ヘリオポーズ(太陽圏界面)",150000,0,""],["ボイジャー1号",244000,0,""]);
+          
           alert("ゲームモードでは、通知とGPS、Service Workerを使用しますので、ブラウザの設定をご確認ください。\nまた、iPhoneで通知機能をご利用いただくには、下のメニューより、「ホーム画面に追加」が必要です。\n※アプリを閉じると、追跡はとまりますのでご安心ください");
              
           navigator.geolocation.getCurrentPosition(pos=>{
@@ -145,7 +142,10 @@
             setup(start);
             L.marker(start).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
           },()=>{location.hash=confirm("位置情報へのアクセスを許可してください。シミュレーションモードに切り変えますか?")? "#simu":location.hash});
-  
+
+          
+          const chec=dist_data[Symbol.iterator]();
+          let des=chec.next();
           navigator.geolocation.watchPosition(e=>{
             L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
             previous=[e.coords.latitude,e.coords.longitude];
