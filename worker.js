@@ -1,11 +1,12 @@
 const APP_NAME = "SolarSystemWalk";
-const VERSION = "2.0.2"; 
+const VERSION = "2.0.3"; 
 const CACHE_NAME = APP_NAME + "_" + VERSION;
 
 const assets = [
   "./",
   "./index.html",
   "./192.png",
+  "./IMG_1948.JPG"
   "https://unpkg.com/leaflet@1.3.1/dist/leaflet.js",
   'https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js',
   'https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css',
