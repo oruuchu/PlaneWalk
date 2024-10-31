@@ -96,11 +96,19 @@
          }).addTo(mymap);
         mymap.setView(pos, sca);
 
-         mymap.addControl(new L.Control.Fullscreen());
+        mymap.addControl(new L.Control.Fullscreen());
         
-         if(location.hash=="#simu"){mymap.on('dblclick', function(e) {
-           scale=Number(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください\n例:1000万分の一→0.1",scale));
-           while(!scale){scale=Number(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。\n例:1000万分の一→0.1"));}
+        function toNum(str) {
+          // 全角英数字を半角に変換
+          str = str.replace(/[０-９]/g, function(s) {
+            return String.fromCharCode(s.charCodeAt(0) - 0xFEE0).trim();
+          });
+          let num=Number(str);
+          return num<10000000? num:num/100000000;
+        } 
+        if(location.hash=="#simu"){mymap.on('dblclick', function(e) {
+           scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
+           while(!scale){scale=toNum(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。"));}
            mymap.remove();
            setup(e.latlng);
            for(dt of dist_data){let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);}
