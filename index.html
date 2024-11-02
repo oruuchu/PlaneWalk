@@ -103,6 +103,10 @@
           str = str.replace(/[０-９]/g, function(s) {
             return String.fromCharCode(s.charCodeAt(0) - 0xFEE0).trim();
           });
+          str=str.replace("億","");
+          str=str.replace("分の1","");
+          str=str.replace("分の一","");
+          
           let num=Number(str);
           return num<10000000? num:num/100000000;
         } 
