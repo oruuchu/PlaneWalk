@@ -56,6 +56,7 @@
       }
     </style>
     <script>
+      navigator.serviceWorker.register("worker.js");
       if(location.hash=="#"){location.hash=="";}
       //惑星名,(1億分の一での)距離,大きさ,解説
       const dist_data=[["水星",580,5,"太陽に一番近い惑星。\nクレーターには、主に芸術家の名前がつけられており、日本人でいうと、ヤマダ(山田耕筰)や、リキュウ(千利休)といったクレーターがある。\n自転が非常にゆっくりで、1日の長さが176日。\n太陽からの重力の関係で、探査機が到達するのは非常に難しい。"],
@@ -96,6 +97,22 @@
          }).addTo(mymap);
         mymap.setView(pos, sca);
 
+        weiwudi.Weiwudi.registerMap('wmts_map', {
+          type: 'wmts',
+          minLat: 35.0,
+          maxLat: 35.1,
+          minLng: 135.0,
+          maxLng: 135.1,
+          minZoom: 3,
+          maxZoom: 18,
+          url: 'https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png'
+        }).then(url => {if(!navigator.onLine){
+          L.tileLayer(
+            url, 
+            {attribution:"<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"}
+          ).addTo(mymap);
+        }});
+        
         mymap.addControl(new L.Control.Fullscreen());
         
         function toNum(str) {
@@ -119,7 +136,6 @@
            L.marker(e.latlng).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
            if(simu_st.open){simu_st.close();}
          });}else if(location.hash){
-           navigator.serviceWorker.register("worker.js");
            navigator.serviceWorker.ready.then(e => {
              Notification.requestPermission();
              window.noti=e;
