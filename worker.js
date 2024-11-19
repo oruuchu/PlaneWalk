@@ -2,6 +2,9 @@ const APP_NAME = "SolarSystemWalk";
 const VERSION = "2.0.3"; 
 const CACHE_NAME = APP_NAME + "_" + VERSION;
 
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/5.1.4/workbox-sw.js");
+importScripts("https://cdn.jsdelivr.net/npm/weiwudi@0.1.0/src/weiwudi_sw.js");
+
 const assets = [
   "./",
   "./index.html",
