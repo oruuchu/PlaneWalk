@@ -56,6 +56,7 @@
       }
     </style>
     <script>
+      import Weiwudi from 'weiwudi';
       navigator.serviceWorker.register("worker.js");
       if(location.hash=="#"){location.hash=="";}
       //惑星名,(1億分の一での)距離,大きさ,解説
@@ -68,7 +69,7 @@
                        ["天王星",28828,51,'太陽系で最も寒い惑星。\nギリシャ神話における天空神である"Uranus"（ウラヌス）から名付けられた。\n自転軸が約98°傾いており、横倒しの状態で公転している。青みががって見える理由として、天王星を覆っているガスの層に含まれるメタンが赤い光を吸収することが挙げられる。\n表面温度は-200°以下にもなり、昼夜の気温差はほとんどない。加えて、公転周期が約84年ということから、極点では昼と夜がそれぞれ約42年間続く。'],
                        ["海王星",45166,50,"太陽系の第八惑星で、1864年に発見された惑星である。太陽系の惑星の中では最も外側を約165年かけて公転しいる。\n現在発見されている衛星数は16個であり、有名な衛星にトリトンがある。\n海王星の表面はメタンの赤の光を吸収し、青の光を散乱させる性質によって青く光っているように見えている。\n惑星はここまでですが、太陽系の旅はまだ続きます！"]
                       ];
-      let start;let mymap;
+      let start;let mymap;let offmap;
       let scale= location.hash=="#game-2"? 2:20;
       let customap = "";
       function setup(pos,sca=13){//マップのセットアップ(マップ作成・レイヤー設定)
@@ -97,7 +98,7 @@
          }).addTo(mymap);
         mymap.setView(pos, sca);
 
-        weiwudi.Weiwudi.registerMap('wmts_map', {
+        Weiwudi.registerMap('wmts_map', {
           type: 'wmts',
           minLat: 35.0,
           maxLat: 35.1,
@@ -107,7 +108,7 @@
           maxZoom: 18,
           url: 'https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png'
         }).then(url => {if(!navigator.onLine){
-          L.tileLayer(
+          offmap=L.tileLayer(
             url, 
             {attribution:"<a href='https://maps.gsi.go.jp/development/ichiran.html' target='_blank'>地理院タイル</a>"}
           ).addTo(mymap);
