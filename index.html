@@ -61,7 +61,7 @@
         display:inline-block;
         width:150px;
         margin:10px;
-        background:#000;
+        background:#fff;
       }
     </style>
     <script>
@@ -200,8 +200,8 @@
 
                 sel1.onclick=sel2.onclick=function(e){
                   e.target.style.border="3px solid";
-                  q_dia.children[1].children[des.value[4].ans].style.background="#5AFF19";
-                  q_dia.children[1].children[!des.value[4].ans].style.background="#F30100";
+                  q_dia.children[1].children[(des.value[4].ans)].style.background="#5AFF19";
+                  q_dia.children[1].children[parseInt(!(des.value[4].ans))].style.background="#F30100";
                 }
                 q_dia.show();
               }}
