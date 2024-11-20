@@ -190,7 +190,7 @@
             previous=[e.coords.latitude,e.coords.longitude];
             while(des.value[1]/scale<=distance([start,previous])){
               window.noti.showNotification(`${des.value[0]}到達!スタート地点から${des.value[1]/scale}m 直径${des.value[2]/scale}cm`,{body:des.value[3]});
-              if(des.value[4]){if(confirm(`${des.value[0]}に関するクイズに挑戦して、折り紙${des.value[0]}儀をgetしますか?`){
+              if(des.value[4]){if(confirm(`${des.value[0]}に関するクイズに挑戦して、折り紙${des.value[0]}儀をgetしますか?`)){
                 const sel1=q_dia.children[0].children[0];
                 const sel2=q_dia.children[0].children[1];
                 
