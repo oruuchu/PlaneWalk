@@ -191,16 +191,17 @@
             while(des.value[1]/scale<=distance([start,previous])){
               window.noti.showNotification(`${des.value[0]}到達!スタート地点から${des.value[1]/scale}m 直径${des.value[2]/scale}cm`,{body:des.value[3]});
               if(des.value[4]){if(confirm(`${des.value[0]}に関するクイズに挑戦して、折り紙${des.value[0]}儀をgetしますか?`)){
-                const sel1=q_dia.children[0].children[0];
-                const sel2=q_dia.children[0].children[1];
+                q_dia.children[0].textContent=des.value[4].Q;
+                const sel1=q_dia.children[1].children[0];
+                const sel2=q_dia.children[1].children[1];
                 
                 sel1.textContent=des.value[4][0];
                 sel2.textContent=des.value[4][1];
 
                 sel1.onclick=sel2.onclick=function(e){
                   e.target.style.border="3px solid";
-                  q_dia.children[0].children[des.value[4].ans].style.background="#5AFF19";
-                  q_dia.children[0].children[!des.value[4].ans].style.background="#F30100";
+                  q_dia.children[1].children[des.value[4].ans].style.background="#5AFF19";
+                  q_dia.children[1].children[!des.value[4].ans].style.background="#F30100";
                 }
                 q_dia.show();
               }}
