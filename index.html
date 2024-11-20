@@ -70,7 +70,7 @@
       //惑星名,(1億分の一での)距離,大きさ,解説
       const dist_data=[["水星",580,5,
                         "太陽に一番近い惑星。\nクレーターには、主に芸術家の名前がつけられており、日本人でいうと、ヤマダ(山田耕筰)や、リキュウ(千利休)といったクレーターがある。\n自転が非常にゆっくりで、1日の長さが176日。\n太陽からの重力の関係で、探査機が到達するのは非常に難しい。",
-                        {q:"水星のクレーターの名前になっているのは",0:"芸術家",1:"科学者",ans:0}
+                        {q:"水星のクレーターの名前になっているのは",s0:"芸術家",s1:"科学者",ans:0}
                        ],
                        ["金星",1085,12,
                         ""],
@@ -101,9 +101,7 @@
 });
          var OSMtile = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
            attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank">©OpenStreetMap</a> contributors'
-         }); 
-         var HOTtile = L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-           attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank">©OpenStreetMap</a> contributors, Tiles: <a href="http://map.hotosm.org/" target="_blank">©HOT</a>'}).addTo(mymap);
+         }).addTo(mymap); 
          var ewi =L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
 });
@@ -111,7 +109,6 @@
            "GoogleMap":Gmap,
            "国土地理院":chiriinn,
            "OpenStreetMap": OSMtile,
-            "Humanitarian map style": HOTtile,
             "航空写真":ewi
          }).addTo(mymap);
         mymap.setView(pos, sca);
@@ -200,8 +197,10 @@
 
                 sel1.onclick=sel2.onclick=function(e){
                   e.target.style.border="3px solid";
-                  q_dia.children[1].children[(des.value[4]["ans"])].style.background="#5AFF19";
-                  q_dia.children[1].children[parseInt(!(des.value[4]["ans"]))].style.background="#F30100";
+                  const ans="s"+des.value[4]["ans"];
+                  const wr="s"+parseInt(!(des.value[4]["ans"]));
+                  q_dia.children[1].children[ans].style.background="#5AFF19";
+                  q_dia.children[1].children[wr].style.background="#F30100";
                 }
                 q_dia.show();
               }}
