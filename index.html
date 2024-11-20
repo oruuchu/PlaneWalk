@@ -57,7 +57,12 @@
 
       #quiz{width:350px;}
       #sel{text-align:center;}
-      #sel>*{display:inline-block;}
+      #sel>*{
+        display:inline-block;
+        width:150px;
+        margin:10px;
+        background:#000;
+      }
     </style>
     <script>
       navigator.serviceWorker.register("worker.js");
@@ -154,6 +159,9 @@
       window.onload=function() {
         const menu=document.getElementById("menu");
         const simu_st=document.getElementById("simu_st");
+        const quiz_dia=document.getElementById("quiz");
+        quiz_dia.show();
+        
         if(!location.hash){
           menu.showModal();
           document.getElementById("map").innerHTML="";
