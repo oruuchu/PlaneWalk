@@ -59,8 +59,9 @@
       .sel{text-align:center;}
       .sel>*{
         display:inline-block;
-        width:150px;
-        margin:10px;
+        width:160px;
+        padding:10px;
+        margin:0;
         background:#fff;
       }
       .pres{visible:hidden;}
@@ -206,7 +207,7 @@
                       this.parentNode.children[${(des.value[4]['ans']+1)%2}].style.background='#F30100';
                       this.parentNode.parentNode.children[2].style.visibility='visible';">${des.value[4]["s1"]}</button>
                   </div>
-                  <a href="${des.value[4]["pres"]}" class="pres">折り紙${des.value[0]}儀を入手(「風船」折りで作れます。)</p>
+                  <a href="${des.value[4]["pres"]}" class="pres">折り紙${des.value[0]}儀を入手(「風船」折りで作れます。)</a>
                   <button type="button" onclick="this.parentNode.close();">閉じる</button>
                 `;
                 document.getElementById("quizes").appendChild(q_dia);
