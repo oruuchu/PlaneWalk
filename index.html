@@ -227,7 +227,7 @@
               if(pla[3]){
                 pla[1]+=pla[3];
                 mymap.removeLayer(pla[0]);
-                pla[0]=L.marker(move(pla[4]/scale,0,start)).addTo(mymap).bindPopup(pla[2]);
+                pla[0]=L.marker(move(pla[4],pla[1],start)).addTo(mymap).bindPopup(pla[2]);
               }
             });
           },1000);
