@@ -55,14 +55,15 @@
         background-position: center center;
       }
 
-      #quiz{width:350px;}
-      #sel{text-align:center;}
-      #sel>*{
+      .quiz{width:350px;}
+      .sel{text-align:center;}
+      .sel>*{
         display:inline-block;
         width:150px;
         margin:10px;
         background:#fff;
       }
+      .pres{visible:hidden;}
     </style>
     <script>
       navigator.serviceWorker.register("worker.js");
@@ -70,7 +71,7 @@
       //惑星名,(1億分の一での)距離,大きさ,解説
       const dist_data=[["水星",580,5,
                         "太陽に一番近い惑星。\nクレーターには、主に芸術家の名前がつけられており、日本人でいうと、ヤマダ(山田耕筰)や、リキュウ(千利休)といったクレーターがある。\n自転が非常にゆっくりで、1日の長さが176日。\n太陽からの重力の関係で、探査機が到達するのは非常に難しい。",
-                        {q:"水星のクレーターの名前になっているのは",s0:"芸術家",s1:"科学者",ans:0}
+                        {q:"水星のクレーターの名前になっているのは",s0:"芸術家",s1:"科学者",ans:0,pres:"https://drive.google.com/file/d/1g5sxzxQkt9dXWoll51BbWrxEqdkTR42h/view?usp=sharing"}
                        ],
                        ["金星",1085,12,
                         ""],
@@ -188,21 +189,26 @@
             while(des.value[1]/scale<=distance([start,previous])){
               window.noti.showNotification(`${des.value[0]}到達!スタート地点から${des.value[1]/scale}m 直径${des.value[2]/scale}cm`,{body:des.value[3]});
               if(des.value[4]){
-                q_dia.children[0].textContent=des.value[4]["Q"];
-                const sel1=q_dia.children[1].children[0];
-                const sel2=q_dia.children[1].children[1];
-                
-                sel1.textContent=des.value[4]["s0"];
-                sel2.textContent=des.value[4]["s1"];
+                const q_dia=document.createElement("dialog");
+                q_dia.class="quiz";
 
-                sel1.onclick=sel2.onclick=function(e){
-                  console.log(des.value[4]);
-                  e.target.style.border="3px solid";
-                  const ans="s"+des.value[4]["ans"];
-                  const wr="s"+parseInt(!(des.value[4]["ans"]));
-                  q_dia.children[1].children[ans].style.background="#5AFF19";
-                  q_dia.children[1].children[wr].style.background="#F30100";
-                }
+                q_dia.innerHTML=`
+                  <p id="Q">${des.value[4]["Q"]}</p>
+                  <div class="sel">
+                    <button type="button" onclick="
+                      this.style.border='3px solid';
+                      this.parentNode.children[${des.value[4]['ans']}].style.background='#5AFF19';
+                      this.parentNode.children[${(des.value[4]['ans']+1)%2}].style.background='#F30100';
+                      this.parentNode.parentNode.children[2].style.visibility='visible';">${des.value[4]["s0"]}</button>
+                    <button type="button" onclick="
+                      this.style.border='3px solid';
+                      this.parentNode.children[${des.value[4]['ans']}].style.background='#5AFF19';
+                      this.parentNode.children[${(des.value[4]['ans']+1)%2}].style.background='#F30100';
+                      this.parentNode.parentNode.children[2].style.visibility='visible';">${des.value[4]["s1"]}</button>
+                  </div>
+                  <a href="${des.value[4]["pres"]}" class="pres">折り紙${des.value[0]}儀を入手(「風船」折りで作れます。)</p>
+                  <button type="button" onclick="this.parentNode.close();">閉じる</button>
+                `;
                 if(confirm(`${des.value[0]}に関するクイズに挑戦して、折り紙${des.value[0]}儀をgetしますか?`)){q_dia.show();}
               }
               L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
@@ -226,14 +232,5 @@
       <a href="#game-20">ゲームモード&lpar;20億分の1/約2kmコース&rpar;</a>
     </dialog>
     <dialog id="simu_st">ダブルクリックで中心地点を指定</dialog>
-    <dialog id="quiz">
-      <p id="Q"></p>
-      <div id="sel">
-        <button type="button"></button>
-        <button type="button"></button>
-      </div>
-      <p id="pres"></p>
-      <button type="button" id="q_quit">閉じる</button>
-    </dialog>
   </body>
 </html>
