@@ -285,6 +285,7 @@
                 des.value[5]? 360/des.value[5]:0,
                 des.value[1]/scale
               ];
+              console.log(des.value[1]/scale,markers[des.value[0]][4]);
               L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
               des=chec.next();
               if(des.done){break;}
