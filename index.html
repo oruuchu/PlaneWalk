@@ -75,12 +75,14 @@
       //惑星名,(1億分の一での)距離,大きさ、解説、クイズ
       const dist_data=[["水星",580,5,
                         "太陽に一番近い惑星。\nクレーターには、主に芸術家の名前がつけられており、日本人でいうと、ヤマダ(山田耕筰)や、リキュウ(千利休)といったクレーターがある。\n自転が非常にゆっくりで、1日の長さが176日。\n太陽からの重力の関係で、探査機が到達するのは非常に難しい。",
-                        {q:"水星のクレーターの名前になっているのは",s0:"芸術家",s1:"科学者",ans:0,pres:"https://drive.google.com/file/d/1g5sxzxQkt9dXWoll51BbWrxEqdkTR42h/view?usp=sharing"}
+                        {q:"水星のクレーターの名前になっているのは?",s0:"芸術家",s1:"科学者",ans:0,pres:"https://drive.google.com/file/d/1g5sxzxQkt9dXWoll51BbWrxEqdkTR42h/view?usp=sharing"}
                        ],
                        ["金星",1085,12,
                         ""],
                        ["地球",1500,13,
-                        "太陽系の中で唯一、生物の確認がされている天体である。\nおよそ46億年前に誕生し、酸素や水などを蓄えている。\n自転周期は24時間、公転周期は365日で、地軸が傾いていることから、季節変化なども見られる。\n衛星として月を伴っていて、潮の満ち引きなどと関わっている。"],
+                        "太陽系の中で唯一、生物の確認がされている天体である。\nおよそ46億年前に誕生し、酸素や水などを蓄えている。\n自転周期は24時間、公転周期は365日で、地軸が傾いていることから、季節変化なども見られる。\n衛星として月を伴っていて、潮の満ち引きなどと関わっている。",
+                        {q:"地球の衛星、月は、地球にどのような影響を及ぼしている?",s0:"流星群の発生",s1:"潮の満ち引き",ans:1,pres:"https://drive.google.com/file/d/12KztB3IRKUwhXMfNd32Qh0haRHFeYKE8/view?usp=drive_link"}
+                       ],
                        ["火星",2286,7,
                         ""],
                        ["木星",7804,143,
@@ -198,7 +200,7 @@
                 q_dia.style.width="350px";
 
                 q_dia.innerHTML=`
-                  <p id="Q">クイズ!${des.value[4]["q"]}</p>
+                  <p id="Q">クイズ<br>!${des.value[4]["q"]}</p>
                   <div class="sel">
                     <button type="button" onclick="
                       this.style.border='3px solid';
@@ -211,7 +213,7 @@
                       this.parentNode.children[${(des.value[4]['ans']+1)%2}].style.background='#F30100';
                       this.parentNode.parentNode.children[2].style.visibility='visible';">${des.value[4]["s1"]}</button>
                   </div>
-                  <a href="${des.value[4]['pres']}" class="pres" style="display:block;">折り紙${des.value[0]}儀を入手(「風船」折りで作れます。)</a>
+                  <a href="${des.value[4]['pres']}" class="pres" style="display:block;">折り紙${des.value[0]}儀を入手<br>(「風船」折りで作れます。)</a>
                   <button type="button" onclick="this.parentNode.close();" style="display:block;" target="_blank" rel="noreferrer noopener">閉じる</button>
                 `;
                 document.getElementById("quizes").appendChild(q_dia);
