@@ -189,7 +189,7 @@
             while(des.value[1]/scale<=distance([start,previous])){
               window.noti.showNotification(`${des.value[0]}到達!スタート地点から${des.value[1]/scale}m 直径${des.value[2]/scale}cm`,{body:des.value[3]});
               if(des.value[4]){
-                const q_dia=document.createElement("dialog");
+                let q_dia=document.createElement("dialog");
                 q_dia.class="quiz";
 
                 q_dia.innerHTML=`
@@ -209,7 +209,7 @@
                   <a href="${des.value[4]["pres"]}" class="pres">折り紙${des.value[0]}儀を入手(「風船」折りで作れます。)</p>
                   <button type="button" onclick="this.parentNode.close();">閉じる</button>
                 `;
-                if(confirm(`${des.value[0]}に関するクイズに挑戦して、折り紙${des.value[0]}儀をgetしますか?`)){q_dia.show();}
+                q_dia.show();
               }
               L.marker(previous).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm");
               L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
