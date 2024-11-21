@@ -169,6 +169,7 @@
       }
       function move(distance, heading, currentPosition) {
         const [latitude, longitude] = currentPosition;
+        distance/=1000;
 
         // 緯線上の移動距離
         const latitudeDistance = distance * Math.cos(heading * Math.PI / 180);
@@ -228,7 +229,6 @@
                 pla[1]+=pla[3];
                 mymap.removeLayer(pla[0]);
                 pla[0]=L.marker(move(pla[4],pla[1],start)).addTo(mymap).bindPopup(pla[2]);
-                console.log(pla[4],distance([start,move(pla[4],pla[1],start)]));
               }
             });
           },1000);
