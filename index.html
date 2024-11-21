@@ -56,6 +56,11 @@
       }
 
       .quiz{width:350px;}
+      .quiz>*{
+        display:block;
+        margin:10px 0;
+        padding:0;
+      }
       .sel{text-align:center;}
       .sel>*{
         display:inline-block;
@@ -194,7 +199,7 @@
                 q_dia.class="quiz";
 
                 q_dia.innerHTML=`
-                  <p id="Q">${des.value[4]["Q"]}</p>
+                  <p id="Q">クイズ!${des.value[4]["q"]}</p>
                   <div class="sel">
                     <button type="button" onclick="
                       this.style.border='3px solid';
