@@ -206,7 +206,7 @@
                 q_dia.style.position="relative";
 
                 q_dia.innerHTML=`
-                  <p style="background:#000;color:#fff;">${des.value[0]}クイズ!<br>${des.value[4]["q"]}</p>
+                  <p style="background:#000;color:#fff;margin:0;">${des.value[0]}クイズ!<br>${des.value[4]["q"]}</p>
                   <div class="sel">
                     <button type="button" onclick="
                       this.style.border='3px solid';
@@ -225,7 +225,10 @@
                     position:absolute;
                     top:0;
                     right:0;
+                    
                     font-size:30px;
+                    font-weight:bold;
+                    color:#F30100
                   ">&times;</button>
                 `;
                 document.getElementById("quizes").appendChild(q_dia);
