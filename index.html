@@ -174,7 +174,7 @@
         const latitudeDistance = distance * Math.cos(heading * Math.PI / 180);
 
         // 1mあたりの緯度
-        const earthCircle = 2 * Math.PI * EARTH_RADIUS;
+        const earthCircle = 2 * Math.PI * 6371;
         const latitudePerMeter = 360 / earthCircle;
 
         // 緯度の変化量
@@ -185,7 +185,7 @@
         const longitudeDistance = distance * Math.sin(heading * Math.PI / 180);
       
         // 1mあたりの経度
-        const earthRadiusAtLongitude = EARTH_RADIUS * Math.cos(newLatitude * Math.PI / 180);
+        const earthRadiusAtLongitude = 6371 * Math.cos(newLatitude * Math.PI / 180);
         const earthCircleAtLongitude = 2 * Math.PI * earthRadiusAtLongitude;
         const longitudePerMeter = 360 / earthCircleAtLongitude;
 
@@ -222,11 +222,14 @@
             L.marker(start).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
           },()=>{location.hash=confirm("位置情報へのアクセスを許可してください。シミュレーションモードに切り変えますか?")? "#simu":location.hash});
           setInterval(function(){
-            markers.forEach(function(pla){if(pla[3]){
-              pla[1]+=pla[3];
-              map.removeLayer(pla[0]);
-              pla[0]=L.marker(move(pla[4]/scale,0,start)).addTo(mymap).bindPopup(pla[2]);
-            }});
+            Object.keys(markers).forEach(function(key){
+              pla=markers[key];
+              if(pla[3]){
+                pla[1]+=pla[3];
+                map.removeLayer(pla[0]);
+                pla[0]=L.marker(move(pla[4]/scale,0,start)).addTo(mymap).bindPopup(pla[2]);
+              }
+            });
           },1000);
           
           const chec=dist_data[Symbol.iterator]();
