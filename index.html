@@ -101,7 +101,7 @@
                        ]
                       ];
       let start;let mymap;let offmap;
-      let scale= location.hash=="#game-2"? 2:20;
+      let scale= Number(location.hash.replace("#game-",""));
       let customap = "";
       let markers={};
       
