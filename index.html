@@ -22,7 +22,7 @@
       }
 
       #menu{text-align;conter;}
-      #menu>a{
+      #menu>a,#menu>select{
         display:block;
         margin:10px;
         
@@ -40,7 +40,7 @@
         position: relative;
         z-index: 2;
       }
-      #menu>a:hover{
+      #menu>a:hover,#menu>select:hover{
         color:#000;
         background-color:#fff;
       }
@@ -290,6 +290,7 @@
             }
           });
         }
+        document.getElementById("game").onchange=function(e){location.hash=e.target.value;}
       };
     </script>
   </head>
@@ -299,8 +300,11 @@
       <h1>太陽系散歩</h1>
       <small>ver.2.1.0 制作協力:ほしとも学生部</small>
       <a href="#simu">シミュレーションモード</a>
-      <a href="#game-2">ゲームモード&lpar;2億分の1/約20kmコース&rpar;</a>
-      <a href="#game-20">ゲームモード&lpar;20億分の1/約2kmコース&rpar;</a>
+      <select id="game">
+        <option valye="#game-2">ゲームモード&lpar;2億分の1/約20kmコース&rpar;</option>
+        <option value="#game-20">ゲームモード&lpar;20億分の1/約2kmコース&rpar;</option>
+        <option value="#game-200">ゲームモード&lpar;200億分の1/約0.2kmコース&rpar;</option>
+      </select>
     </dialog>
     <dialog id="simu_st">ダブルクリックで中心地点を指定</dialog>
     <div id="quizes"></div>
