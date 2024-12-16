@@ -103,7 +103,7 @@
       let start;let mymap;
       let scale= location.hash=="#simu"? 2:Number(location.hash.replace("#game-",""));
       let customap = "";
-      let markers={};
+      let markers=[];
       
       function setup(pos,sca=13){//マップのセットアップ(マップ作成・レイヤー設定)
         mymap = L.map('map');
@@ -148,7 +148,7 @@
           mymap.remove();
           setup(e.latlng);
 
-          markers={};
+          markers=[];
           for(dt of dist_data){
             let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
             markers.push([
