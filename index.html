@@ -215,7 +215,7 @@
         }else if(menu.open){menu.close();}
         
         if(location.hash=="#simu"){
-          navigator.geolocation.getCurrentPosition(pos=>{setup([pos.coords.latitude,pos.coords.longitude],7);};
+          navigator.geolocation.getCurrentPosition(pos=>{setup([pos.coords.latitude,pos.coords.longitude],7);});
           simu_st.show();
         }else if(location.hash){
           if(scale==2 || scale==20){
