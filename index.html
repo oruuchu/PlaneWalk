@@ -215,7 +215,16 @@
         }else if(menu.open){menu.close();}
         
         if(location.hash=="#simu"){
-          navigator.geolocation.getCurrentPosition(pos=>{setup([pos.coords.latitude,pos.coords.longitude],7);});
+          navigator.geolocation.getCurrentPosition(pos=>{
+            setup([pos.coords.latitude,pos.coords.longitude],13);
+            for(dt in dist_data){markers.push([
+              L.marker(move(dt[1]/scale,0,start)).addTo(mymap).bindPopup(dt[0]+" 直径"+dt[2]/scale+"cm"),
+              0,
+              dt[0]+" 直径"+dt[2]/scale+"cm",
+              dt[5]? 360/dt[5]:0,
+              dt[1]/scale
+            ]);}
+          });
           simu_st.show();
         }else if(location.hash){
           if(scale==2 || scale==20){
