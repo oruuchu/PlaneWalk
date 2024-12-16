@@ -146,13 +146,14 @@
           scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
           while(!scale){scale=toNum(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。"));}
           mymap.remove();
-          setup(e.latlng);
+          start=[e.latlng.lat,e.latlng.lng];
+          setup(start);
 
           markers=[];
           for(dt of dist_data){
             let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
             markers.push([
-              L.marker(move(dt[1]/scale,0,[e.latlng.lat,e.latlng.lng])).addTo(mymap).bindPopup(dt[0]+" 直径"+dt[2]/scale+"cm"),
+              L.marker(move(dt[1]/scale,0,start)).addTo(mymap).bindPopup(dt[0]+" 直径"+dt[2]/scale+"cm"),
               0,
               dt[0]+" 直径"+dt[2]/scale+"cm",
               dt[5]? 360/dt[5]:0,
