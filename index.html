@@ -101,11 +101,11 @@
                        ]
                       ];
       let start;let mymap;let offmap;
-      let scale= Number(location.hash.replace("#game-",""));
+      let scale= location.hash=="#simu"? 2:Number(location.hash.replace("#game-",""));
       let customap = "";
       let markers={};
       
-      function setup(pos,sca=13){//マップのセットアップ(マップ作成・レイヤー設定)
+      function setup(pos=[35,135],sca=13){//マップのセットアップ(マップ作成・レイヤー設定)
         mymap = L.map('map');
          //マップタイルの定義
          var Gmap=L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
@@ -195,6 +195,12 @@
       
         return [newLatitude, longitude + longitudeDelta];
       }
+      const plane_rotate=function(){Object.keys(markers).forEach(function(key){
+        pla=markers[key];
+        pla[1]+=pla[3];
+        mymap.removeLayer(pla[0]);
+        pla[0]=L.marker(move(pla[4],pla[1],start)).addTo(mymap).bindPopup(pla[2]);
+      });}
       
       window.onhashchange=function(){location.reload();};
       window.onload=function() {
@@ -209,7 +215,7 @@
         }else if(menu.open){menu.close();}
         
         if(location.hash=="#simu"){
-          setup([35,135],7);
+          navigator.geolocation.getCurrentPosition(pos=>{setup([pos.coords.latitude,pos.coords.longitude],7);};
           simu_st.show();
         }else if(location.hash){
           if(scale==2 || scale==20){
@@ -222,15 +228,11 @@
             start=previous=[pos.coords.latitude,pos.coords.longitude];
             setup(start);
             L.marker(start).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
-          },()=>{location.hash=confirm("位置情報へのアクセスを許可してください。シミュレーションモードに切り変えますか?")? "#simu":location.hash});
-          setInterval(function(){
-            Object.keys(markers).forEach(function(key){
-              pla=markers[key];
-              pla[1]+=pla[3];
-              mymap.removeLayer(pla[0]);
-              pla[0]=L.marker(move(pla[4],pla[1],start)).addTo(mymap).bindPopup(pla[2]);
-            });
-          },1000);
+          },()=>{
+            if(confirm("位置情報へのアクセスを許可してください。シミュレーションモードに切り変えますか?")){location.hash="#simu";}
+            else{wiodow.reload();}
+          });
+          setInterval(plane_rotate,1000);
           
           const chec=dist_data[Symbol.iterator]();
           let des=chec.next();
@@ -299,7 +301,7 @@
     <div id="map"></div>
     <dialog id="menu">
       <h1>太陽系散歩</h1>
-      <small>ver.2.1.1 制作協力:ほしとも学生部</small>
+      <small>ver.2.1.2 制作協力:ほしとも学生部</small>
       <a href="#simu">シミュレーションモード</a>
       <select id="game">
         <option>ゲームモード</option>
