@@ -100,7 +100,7 @@
                         {q:"天王星と海王星が青く見えるのにかかわっている物質は?",s0:"メタン",s1:"ヘリウム",ans:0,pres:"https://drive.google.com/file/d/1uUIF6U8Dt_PyGgKQqxrNk3CzZ-U4rQUu/view?usp=drive_link"},60141
                        ]
                       ];
-      let start;let mymap;let offmap;
+      let start;let mymap;
       let scale= location.hash=="#simu"? 2:Number(location.hash.replace("#game-",""));
       let customap = "";
       let markers={};
@@ -228,7 +228,7 @@
         if(location.hash=="#simu"){
           navigator.geolocation.getCurrentPosition(
             pos=>{setup([pos.coords.latitude,pos.coords.longitude]);},
-            ()=>{setup([35,135]);}
+            ()=>{setup([35,135],7);}
           );
           simu_st.show();
         }else if(location.hash){
