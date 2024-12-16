@@ -143,13 +143,24 @@
           return num<10000000? num:num/100000000;
         } 
         if(location.hash=="#simu"){mymap.on('dblclick', function(e) {
-           scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
-           while(!scale){scale=toNum(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。"));}
-           mymap.remove();
-           setup(e.latlng);
-           for(dt of dist_data){let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);}
-           L.marker(e.latlng).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
-           if(simu_st.open){simu_st.close();}
+          scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
+          while(!scale){scale=toNum(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。"));}
+          mymap.remove();
+          setup(e.latlng);
+
+          markers={};
+          for(dt of dist_data){
+            let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
+            markers.push([
+              L.marker(move(dt[1]/scale,0,e.latlng)).addTo(mymap).bindPopup(dt[0]+" 直径"+dt[2]/scale+"cm"),
+              0,
+              dt[0]+" 直径"+dt[2]/scale+"cm",
+              dt[5]? 360/dt[5]:0,
+              dt[1]/scale
+            ]);
+          }
+          L.marker(e.latlng).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
+          if(simu_st.open){simu_st.close();}
          });}else if(location.hash){
            navigator.serviceWorker.ready.then(e => {
              Notification.requestPermission();
@@ -195,12 +206,12 @@
       
         return [newLatitude, longitude + longitudeDelta];
       }
-      const plane_rotate=function(){Object.keys(markers).forEach(function(key){
+      setInterval(function(){Object.keys(markers).forEach(function(key){
         pla=markers[key];
         pla[1]+=pla[3];
         mymap.removeLayer(pla[0]);
         pla[0]=L.marker(move(pla[4],pla[1],start)).addTo(mymap).bindPopup(pla[2]);
-      });}
+      });},1000);
       
       window.onhashchange=function(){location.reload();};
       window.onload=function() {
@@ -215,25 +226,7 @@
         }else if(menu.open){menu.close();}
         
         if(location.hash=="#simu"){
-          navigator.geolocation.getCurrentPosition(pos=>{
-            setup([pos.coords.latitude,pos.coords.longitude],13);
-            for(dt in dist_data){markers.push([
-              L.marker(move(dt[1]/scale,0,[pos.coords.latitude,pos.coords.longitude])).addTo(mymap).bindPopup(dt[0]+" 直径"+dt[2]/scale+"cm"),
-              0,
-              dt[0]+" 直径"+dt[2]/scale+"cm",
-              dt[5]? 360/dt[5]:0,
-              dt[1]/scale
-            ]);}
-          },()=>{
-            setup([35,135],13);
-            for(dt in dist_data){markers.push([
-              L.marker(move(dt[1]/scale,0,[35,135])).addTo(mymap).bindPopup(dt[0]+" 直径"+dt[2]/scale+"cm"),
-              0,
-              dt[0]+" 直径"+dt[2]/scale+"cm",
-              dt[5]? 360/dt[5]:0,
-              dt[1]/scale
-            ]);}
-          });
+          navigator.geolocation.getCurrentPosition(pos=>{mymap.setView([pos.coords.latitude,pos.coords.longitude],13);});
           simu_st.show();
         }else if(location.hash){
           if(scale==2 || scale==20){
@@ -250,7 +243,6 @@
             if(confirm("位置情報へのアクセスを許可してください。シミュレーションモードに切り変えますか?")){location.hash="#simu";}
             else{wiodow.reload();}
           });
-          setInterval(plane_rotate,1000);
           
           const chec=dist_data[Symbol.iterator]();
           let des=chec.next();
