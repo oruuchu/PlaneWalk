@@ -7,7 +7,7 @@ const chiriinn=L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}
 });
 const OSMtile = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '<a href="https://www.openstreetmap.org/copyright" target="_blank">©OpenStreetMap</a> contributors'
-}).addTo(mymap); 
+});
 const ewi =L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
   attribution: 'Tiles © Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
 });
@@ -16,6 +16,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
   mymap = L.map('map');
   mymap.setView(pos, sca);
   mymap.addControl(new L.Control.Fullscreen());
+  OSMtile.addTo(mymap); 
   
   if(location.hash=="#simu"){mymap.on('dblclick', function(e) {
     scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
