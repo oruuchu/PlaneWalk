@@ -18,8 +18,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
   
   mymap.addControl(new L.Control.Fullscreen());
   
-  if(location.hash=="#simu"){mymap.on('dblclick', function(e) {
-    e.preventDefault();
+  if(location.hash=="#simu"){mymap.on('dblclick touchstart', function(e) {
     scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
     while(!scale){scale=toNum(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。"));}
     mymap.remove();
