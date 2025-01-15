@@ -1,4 +1,3 @@
-
 //惑星名,(1億分の一での)距離,大きさ、解説、クイズ
 const dist_data=[
   ["水星",580,5,
@@ -56,15 +55,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     //markers=[];
     for(dt of dist_data){
       let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
-      L.marker(start).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");/*
-      markers.push([
-        L.marker(move(dt[1]/scale,0,start)).addTo(mymap).bindPopup(dt[0]+" 直径"+dt[2]/scale+"cm"),
-        0,
-        dt[0]+" 直径"+dt[2]/scale+"cm",
-        dt[5]? 360/dt[5]:0,
-        dt[1]/scale
-        ]);
-      }*/
+      L.marker(start).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
       let path=[...Array(dt[5]).keys()].map((c) => {return move(dt[1]/scale,c/dt[5]*360,start)});
       L.Marker.movingMarker(path,1000*(dt[5]-1),{autostart:true,loop:true}).addTo(mymap).bindPopup(`${dt[0]} 直径${dt[2]/scale}cm`);
       if(simu_st.open){simu_st.close();}
