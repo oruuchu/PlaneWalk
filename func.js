@@ -100,6 +100,7 @@ function distance([[lat1, lng1], [lat2, lng2]]) {
 }
 
 function move(distance, heading, currentPosition) {
+  heading=0-heading;
   const [latitude, longitude] = currentPosition;
   distance/=1000;
 
@@ -127,10 +128,4 @@ function move(distance, heading, currentPosition) {
   
   return [newLatitude, longitude + longitudeDelta];
 }
-/*setInterval(function(){Object.keys(markers).forEach(function(key){
-  pla=markers[key];
-  pla[1]-=pla[3];
-  mymap.removeLayer(pla[0]);
-  pla[0]=L.marker(move(pla[4],pla[1],start)).addTo(mymap).bindPopup(pla[2]);
-});},1000);*/
       
