@@ -66,6 +66,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
         ]);
       }*/
       let path=[...Array(dt[5]).keys()].map((c) => {return [move(dt[1]/scale,c/dt[5],start)]});
+      console.log(path);
       L.Marker.movingMarker([path[0]],dt[5]*1000,{autostart:true,loop:true}).addTo(mymap).bindPopup($`{dt[0]} 直径${dt[2]/scale}cm`);
       if(simu_st.open){simu_st.close();}
     }
