@@ -106,13 +106,8 @@
                 document.getElementById("quizes").appendChild(q_dia);
                 q_dia.show();
               }
-              markers[des.value[0]]=[
-                L.marker(move(des.value[1]/scale,0,start)).addTo(mymap).bindPopup(des.value[0]+" 直径"+des.value[2]/scale+"cm"),
-                0,
-                des.value[0]+" 直径"+des.value[2]/scale+"cm",
-                des.value[5]? 360/des.value[5]:0,
-                des.value[1]/scale
-              ];
+              let path=[...Array(des.value[5]).keys()].map((c) => {return move(des.value[1]/scale,c/des.value[5]*360,start)});
+              L.Marker.movingMarker(path,1000*(des.value[5]-1),{autostart:true,loop:true}).addTo(mymap).bindPopup(`${des.value[0]} 直径${des.value[2]/scale}cm`);
               L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
               des=chec.next();
               if(des.done){break;}
