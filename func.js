@@ -53,9 +53,9 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     start=[e.latlng.lat,e.latlng.lng];
     setup(start);
 
-    markers=[];
+    //markers=[];
     for(dt of dist_data){
-      let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
+      let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);/*
       markers.push([
         L.marker(move(dt[1]/scale,0,start)).addTo(mymap).bindPopup(dt[0]+" 直径"+dt[2]/scale+"cm"),
         0,
@@ -63,8 +63,9 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
         dt[5]? 360/dt[5]:0,
         dt[1]/scale
         ]);
-      }
-      L.marker(e.latlng).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
+      }*/
+      let path=[...Array(dt[5]).keys()].map((c) => {return [move(dt[1]/scale,c/dt[5],e.latlng)]});
+      L.marker.movingMarker(e.latlng,dt[5]*1000,{autostart:true,loop:true}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
       if(simu_st.open){simu_st.close();}
   });}else if(location.hash){
     navigator.serviceWorker.ready.then(e => {
@@ -124,10 +125,10 @@ function move(distance, heading, currentPosition) {
   
   return [newLatitude, longitude + longitudeDelta];
 }
-setInterval(function(){Object.keys(markers).forEach(function(key){
+/*setInterval(function(){Object.keys(markers).forEach(function(key){
   pla=markers[key];
   pla[1]-=pla[3];
   mymap.removeLayer(pla[0]);
   pla[0]=L.marker(move(pla[4],pla[1],start)).addTo(mymap).bindPopup(pla[2]);
-});},1000);
+});},1000);*/
       
