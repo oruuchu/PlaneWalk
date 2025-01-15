@@ -56,7 +56,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     //markers=[];
     for(dt of dist_data){
       let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
-      L.marker(start).bindPopup("太陽 直径"+14/scale+"m");/*
+      L.marker(start).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");/*
       markers.push([
         L.marker(move(dt[1]/scale,0,start)).addTo(mymap).bindPopup(dt[0]+" 直径"+dt[2]/scale+"cm"),
         0,
