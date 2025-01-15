@@ -65,8 +65,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
         dt[1]/scale
         ]);
       }*/
-      let path=[...Array(dt[5]).keys()].map((c) => {return [move(dt[1]/scale,c/dt[5]*360,start)]});
-      L.Marker.movingMarker([[35,135],[34.9,135],[34.8,134.9]],1000,{autostart:true,loop:true}).addTo(mymap).bindPopup(`${dt[0]} 直径${dt[2]/scale}cm`);
+      let path=[...Array(dt[5]).keys()].map((c) => {return move(dt[1]/scale,c/dt[5]*360,start)});
       L.Marker.movingMarker(path,1000*(dt[5]-1),{autostart:true,loop:true}).addTo(mymap).bindPopup(`${dt[0]} 直径${dt[2]/scale}cm`);
       if(simu_st.open){simu_st.close();}
     }
