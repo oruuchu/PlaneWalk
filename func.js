@@ -48,6 +48,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
   
   if(location.hash=="#simu"){mymap.on('dblclick', function(e) {
     scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
+    L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
     while(!scale){scale=toNum(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。"));}
     mymap.remove();
     start=[e.latlng.lat,e.latlng.lng];
@@ -60,13 +61,13 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
       if(simu_st.open){simu_st.close();}
     }
   });}else if(location.hash){
+    L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
     navigator.serviceWorker.ready.then(e => {
       Notification.requestPermission();
       window.noti=e;
       window.noti.showNotification("太陽系散歩へようこそ!!現在地から、歩いてみてください。");
     });
   }
-  L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
 }
 
 let previous;
