@@ -24,7 +24,7 @@ const dist_data=[
    {q:"天王星と海王星が青く見えるのにかかわっている物質は?",s0:"メタン",s1:"ヘリウム",ans:0,pres:"https://drive.google.com/file/d/1uUIF6U8Dt_PyGgKQqxrNk3CzZ-U4rQUu/view?usp=drive_link"},60141
   ]
 ];
-let scale=2;
+let scale= location.hash=="#simu"? 2:Number(location.hash.replace("#game-",""));
 
 //マップタイルの定義
 const Gmap=L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
