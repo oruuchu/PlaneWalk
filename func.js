@@ -55,7 +55,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     //markers=[];
     for(dt of dist_data){
       let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
-      L.marker(start).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
+      L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[37,32],iconAnchor:[18.5,16]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
       let path=[...Array(dt[5]).keys()].map((c) => {return move(dt[1]/scale,c/dt[5]*360,start)});
       L.Marker.movingMarker(path,1000*(dt[5]-1),{autostart:true,loop:true}).addTo(mymap).bindPopup(`${dt[0]} 直径${dt[2]/scale}cm`);
       if(simu_st.open){simu_st.close();}
