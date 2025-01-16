@@ -60,13 +60,13 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
       let mark=L.Marker.movingMarker(path,1000*(dt[5]-1),{autostart:true,loop:true}).addTo(mymap).bindPopup(`${dt[0]} 直径${dt[2]/scale}cm`);
       switch(dt[0]){
         case "木星":
-          mark.options.icon=L.icon({iconUrl:"image/Jupyter.png",iconSize:[74,64],iconAnchor:[37,32]};break;
+          mark.options.icon=L.icon({iconUrl:"image/Jupyter.png",iconSize:[74,64],iconAnchor:[37,32]});break;
         case "土星":
-          mark.options.icon=L.icon({iconUrl:"image/Saturn.png",iconSize:[74,64],iconAnchor:[37,32]};break;
+          mark.options.icon=L.icon({iconUrl:"image/Saturn.png",iconSize:[74,64],iconAnchor:[37,32]});break;
         case "天王星":
-          mark.options.icon=L.icon({iconUrl:"image/Uranus.png",iconSize:[74,64],iconAnchor:[37,32]};break;
+          mark.options.icon=L.icon({iconUrl:"image/Uranus.png",iconSize:[74,64],iconAnchor:[37,32]});break;
         case "海王星":
-          mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[74,64],iconAnchor:[37,32]};break;
+          mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[74,64],iconAnchor:[37,32]});break;
       }
       if(simu_st.open){simu_st.close();}
     }
