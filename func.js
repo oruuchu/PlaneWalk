@@ -66,7 +66,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
         case "天王星":
           mark.options.icon=L.icon({iconUrl:"image/Uranus.png",iconSize:[74,64],iconAnchor:[37,32]});break;
         case "海王星":
-          mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[74,64],iconAnchor:[37,32]});break;
+          mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[37,32],iconAnchor:[18.5,16]});break;
       }
       mark.addTo(mymap);
       if(simu_st.open){simu_st.close();}
