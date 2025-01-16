@@ -21,7 +21,6 @@
       navigator.serviceWorker.register("worker.js");
       if(location.hash=="#"){location.hash=="";}
       let start;let mymap;
-      let scale= location.hash=="#simu"? 2:Number(location.hash.replace("#game-",""));
       let customap = "";
       let markers=[];
       
@@ -54,7 +53,6 @@
           navigator.geolocation.getCurrentPosition(pos=>{
             start=previous=[pos.coords.latitude,pos.coords.longitude];
             setup(start,18);
-            L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[37,32],iconAnchor:[18.5,16]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
           },()=>{
             if(confirm("位置情報へのアクセスを許可してください。シミュレーションモードに切り変えますか?")){location.hash="#simu";}
             else{wiodow.reload();}
