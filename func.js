@@ -24,6 +24,7 @@ const dist_data=[
    {q:"天王星と海王星が青く見えるのにかかわっている物質は?",s0:"メタン",s1:"ヘリウム",ans:0,pres:"https://drive.google.com/file/d/1uUIF6U8Dt_PyGgKQqxrNk3CzZ-U4rQUu/view?usp=drive_link"},60141
   ]
 ];
+let scale=2;
 
 //マップタイルの定義
 const Gmap=L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
@@ -52,10 +53,8 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     start=[e.latlng.lat,e.latlng.lng];
     setup(start);
 
-    //markers=[];
     for(dt of dist_data){
       let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
-      L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[37,32],iconAnchor:[18.5,16]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
       let path=[...Array(dt[5]).keys()].map((c) => {return move(dt[1]/scale,c/dt[5]*360,start)});
       L.Marker.movingMarker(path,1000*(dt[5]-1),{autostart:true,loop:true}).addTo(mymap).bindPopup(`${dt[0]} 直径${dt[2]/scale}cm`);
       if(simu_st.open){simu_st.close();}
@@ -67,6 +66,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
       window.noti.showNotification("太陽系散歩へようこそ!!現在地から、歩いてみてください。");
     });
   }
+  L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
 }
 
 let previous;
