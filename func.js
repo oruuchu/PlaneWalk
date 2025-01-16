@@ -48,11 +48,11 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
   
   if(location.hash=="#simu"){mymap.on('dblclick', function(e) {
     scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
-    L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
     while(!scale){scale=toNum(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。"));}
     mymap.remove();
     start=[e.latlng.lat,e.latlng.lng];
     setup(start);
+    L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
 
     for(dt of dist_data){
       let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
@@ -61,7 +61,6 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
       if(simu_st.open){simu_st.close();}
     }
   });}else if(location.hash){
-    L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
     navigator.serviceWorker.ready.then(e => {
       Notification.requestPermission();
       window.noti=e;
