@@ -57,7 +57,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     for(dt of dist_data){
       let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
       let path=[...Array(dt[5]).keys()].map((c) => {return move(dt[1]/scale,c/dt[5]*360,start)});
-      let mark=L.Marker.movingMarker(path,1000*(dt[5]-1),{autostart:true,loop:true}).addTo(mymap).bindPopup(`${dt[0]} 直径${dt[2]/scale}cm`);
+      let mark=L.Marker.movingMarker(path,1000*(dt[5]-1),{autostart:true,loop:true}).bindPopup(`${dt[0]} 直径${dt[2]/scale}cm`);
       switch(dt[0]){
         case "木星":
           mark.options.icon=L.icon({iconUrl:"image/Jupyter.png",iconSize:[74,64],iconAnchor:[37,32]});break;
@@ -68,6 +68,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
         case "海王星":
           mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[74,64],iconAnchor:[37,32]});break;
       }
+      mark.addTo(mymap);
       if(simu_st.open){simu_st.close();}
     }
   });}else if(location.hash){
