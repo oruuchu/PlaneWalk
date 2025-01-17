@@ -1,5 +1,5 @@
 const APP_NAME = "SolarSystemWalk";
-const VERSION = "2.2.0"; 
+const VERSION = "2.2.1"; 
 const CACHE_NAME = APP_NAME + "_" + VERSION;
 
 const assets = [
@@ -16,6 +16,7 @@ const assets = [
   "https://cdn.jsdelivr.net/npm/leaflet-easybutton@2.4.0/src/easy-button.min.js",
   "https://cdn.jsdelivr.net/npm/leaflet-easybutton@2.4.0/src/easy-button.min.css",
   "./image/Sun.png",
+  "./image/Mercury.png","./image/Venus.png","./image/Earth.png","./image/Mars.png",
   "./image/Jupyter.png","./image/Saturn.png","./image/Uranus.png","./image/Neptune.png"
 ];
 
