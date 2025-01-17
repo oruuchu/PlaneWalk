@@ -59,6 +59,14 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
       let path=[...Array(dt[5]).keys()].map((c) => {return move(dt[1]/scale,c/dt[5]*360,start)});
       let mark=L.Marker.movingMarker(path,1000*(dt[5]-1),{autostart:true,loop:true}).bindPopup(`${dt[0]} 直径${dt[2]/scale}cm`);
       switch(dt[0]){
+        case "水星":
+          mark.options.icon=L.icon({iconUrl:"image/Mercury.png",iconSize:[25,25],iconAnchor:[12.5,12.5]});break;
+        case "金星":
+          mark.options.icon=L.icon({iconUrl:"image/Venus.png",iconSize:[25,25],iconAnchor:[12.5,12.5]});break;
+        case "地球":
+          mark.options.icon=L.icon({iconUrl:"image/Earth.png",iconSize:[25,25],iconAnchor:[12.5,12.5]});break;
+        case "火星":
+          mark.options.icon=L.icon({iconUrl:"image/Mars.png",iconSize:[25,25],iconAnchor:[12.5,12.5]});break;
         case "木星":
           mark.options.icon=L.icon({iconUrl:"image/Jupyter.png",iconSize:[74,64],iconAnchor:[37,32]});break;
         case "土星":
