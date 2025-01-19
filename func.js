@@ -24,7 +24,10 @@ const dist_data=[
    document.getElementById("nep"),60141
   ]
 ];
-dist_data.forEach(dt=>{dt.onclick=()=>{this[4].showModal();};});
+dist_data.forEach(dt=>{
+  dt.onclick=function(){this[4].showModal();};
+  dt[4].onclick=function(e){if(e.target.closest('#dlgs') === null) {e.target.close();}};
+});
 
 let scale= location.hash=="#simu"? 2:Number(location.hash.replace("#game-",""));
 
@@ -58,25 +61,30 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
 
     for(dt of dist_data){
       let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
-      let path=[...Array(dt[5]).keys()].map((c) => {return move(dt[1]/scale,c/dt[5]*360,start)});
-      let mark=L.Marker.movingMarker(path,1000*(dt[5]-1),{autostart:true,loop:true}).bindPopup(`${dt[0]} 直径${dt[2]/scale}cm`);
-      switch(dt[0]){
-        case "水星":
-          mark.options.icon=L.icon({iconUrl:"image/Mercury.png",iconSize:[50,50],iconAnchor:[25,25]});break;
-        case "金星":
-          mark.options.icon=L.icon({iconUrl:"image/Venus.png",iconSize:[50,50],iconAnchor:[25,25]});break;
-        case "地球":
-          mark.options.icon=L.icon({iconUrl:"image/Earth.png",iconSize:[50,50],iconAnchor:[25,25]});break;
-        case "火星":
-          mark.options.icon=L.icon({iconUrl:"image/Mars.png",iconSize:[50,50],iconAnchor:[25,25]});break;
-        case "木星":
-          mark.options.icon=L.icon({iconUrl:"image/Jupyter.png",iconSize:[74,64],iconAnchor:[37,32]});break;
-        case "土星":
-          mark.options.icon=L.icon({iconUrl:"image/Saturn.png",iconSize:[74,64],iconAnchor:[37,32]});break;
-        case "天王星":
-          mark.options.icon=L.icon({iconUrl:"image/Uranus.png",iconSize:[74,64],iconAnchor:[37,32]});break;
-        case "海王星":
-          mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[37,32],iconAnchor:[18.5,16]});break;
+      let mark;
+      if(dt[5]){
+        let path=[...Array(dt[5]).keys()].map((c) => {return move(dt[1]/scale,c/dt[5]*360,start);});
+        mark=L.Marker.movingMarker(path,1000*(dt[5]-1),{autostart:true,loop:true}).on("click",dt.onclick);
+        switch(dt[0]){
+          case "水星":
+            mark.options.icon=L.icon({iconUrl:"image/Mercury.png",iconSize:[50,50],iconAnchor:[25,25]});break;
+          case "金星":
+            mark.options.icon=L.icon({iconUrl:"image/Venus.png",iconSize:[50,50],iconAnchor:[25,25]});break;
+          case "地球":
+            mark.options.icon=L.icon({iconUrl:"image/Earth.png",iconSize:[50,50],iconAnchor:[25,25]});break;
+          case "火星":
+            mark.options.icon=L.icon({iconUrl:"image/Mars.png",iconSize:[50,50],iconAnchor:[25,25]});break;
+          case "木星":
+            mark.options.icon=L.icon({iconUrl:"image/Jupyter.png",iconSize:[74,64],iconAnchor:[37,32]});break;
+          case "土星":
+            mark.options.icon=L.icon({iconUrl:"image/Saturn.png",iconSize:[74,64],iconAnchor:[37,32]});break;
+          case "天王星":
+            mark.options.icon=L.icon({iconUrl:"image/Uranus.png",iconSize:[74,64],iconAnchor:[37,32]});break;
+          case "海王星":
+            mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[37,32],iconAnchor:[18.5,16]});break;
+        }
+      }else{
+        mark=L.marker(move(dt[1]/scale,0,start).on("click",dt.onclick);
       }
       mark.addTo(mymap);
       if(simu_st.open){simu_st.close();}
