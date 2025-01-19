@@ -68,45 +68,6 @@
             previous=[e.coords.latitude,e.coords.longitude];
             while(des.value[1]/scale<=distance([start,previous])){
               window.noti.showNotification(`${des.value[0]}到達!スタート地点から${des.value[1]/scale}m 直径${des.value[2]/scale}cm`,{body:des.value[3]});
-              if(des.value[4]){
-                let q_dia=document.createElement("dialog");
-                q_dia.class="quiz";
-                q_dia.style.width="350px";
-                q_dia.style.padding="0";
-                q_dia.style.position="relative";
-                q_dia.style.margin="10px";
-
-                q_dia.innerHTML=`
-                  <p style="background:#000;color:#fff;margin:0 0 10px;">${des.value[0]}クイズ!<br>${des.value[4]["q"]}</p>
-                  <div class="sel">
-                    <button type="button" onclick="
-                      this.style.border='3px solid';
-                      this.parentNode.children[${des.value[4]['ans']}].style.background='#5AFF19';
-                      this.parentNode.children[${(des.value[4]['ans']+1)%2}].style.background='#F30100';
-                      this.parentNode.parentNode.children[2].style.visibility='visible';">${des.value[4]["s0"]}</button><!--
-                    --><button type="button" onclick="
-                      this.style.border='3px solid';
-                      this.parentNode.children[${des.value[4]['ans']}].style.background='#5AFF19';
-                      this.parentNode.children[${(des.value[4]['ans']+1)%2}].style.background='#F30100';
-                      this.parentNode.parentNode.children[2].style.visibility='visible';">${des.value[4]["s1"]}</button>
-                  </div>
-                  <a href="${des.value[4]['pres']}" class="pres" style="display:block;" target="_blank" rel="noreferrer noopener">折り紙${des.value[0]=="海王星"? "惑星(コンプリートパック)":des.value[0]}儀を入手<br>(「風船」折りで作れます。)</a>
-                  <button type="button" onclick="this.parentNode.close();" style="
-                    display:block;
-                    position:absolute;
-                    top:0;
-                    right:0;
-                    
-                    font-size:30px;
-                    font-weight:bold;
-                    color:#F30100;
-                    background-color: transparent;
-                    border:none;
-                  ">&times;</button>
-                `;
-                document.getElementById("quizes").appendChild(q_dia);
-                q_dia.show();
-              }
               
               let mark;
               if(des.value[5]){
