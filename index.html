@@ -48,7 +48,7 @@
         dist_data[6][4]=document.getElementById("ura");
         dist_data[7][4]=document.getElementById("nep");
         dist_data.forEach(dt=>{
-          dt.onclick=function(){console.log(this);this[4].showModal();}.bind(dt);
+          dt.onclick=function(){this[4].showModal();}.bind(dt);
           dt[4].onclick=function(e){if(e.target.closest('#dlgs') === null) {e.target.close();}};
         });
         
