@@ -2,26 +2,26 @@
 const dist_data=[
   ["水星",580,5,
    "太陽に一番近い惑星。\nクレーターには、主に芸術家の名前がつけられており、日本人でいうと、ヤマダ(山田耕筰)や、リキュウ(千利休)といったクレーターがある。\n自転が非常にゆっくりで、1日の長さが176日。\n太陽からの重力の関係で、探査機が到達するのは非常に難しい。",
-   {q:"水星のクレーターの名前になっているのは?",s0:"芸術家",s1:"科学者",ans:0,pres:"https://drive.google.com/file/d/1g5sxzxQkt9dXWoll51BbWrxEqdkTR42h/view?usp=sharing"},88
+   document.getElementById("mer"),88
   ],
-  ["金星",1085,12,"",false,225],
+  ["金星",1085,12,"",document.getElementById("ven"),225],
   ["地球",1500,13,
    "太陽系の中で唯一、生物の確認がされている天体である。\nおよそ46億年前に誕生し、酸素や水などを蓄えている。\n自転周期は24時間、公転周期は365日で、地軸が傾いていることから、季節変化なども見られる。\n衛星として月を伴っていて、潮の満ち引きなどと関わっている。",
-   {q:"地球の衛星、月は、地球にどのような影響を及ぼしている?",s0:"流星群の発生",s1:"潮の満ち引き",ans:1,pres:"https://drive.google.com/file/d/12KztB3IRKUwhXMfNd32Qh0haRHFeYKE8/view?usp=drive_link"},365
+   document.getElementById("ear"),365
   ],
-  ["火星",2286,7,"",false,687],
-  ["木星",7804,143,"",false,4330],
+  ["火星",2286,7,"",document.getElementById("mar"),687],
+  ["木星",7804,143,"",document.getElementById("jup"),4330],
   ["土星",14332,120,
    "太陽系で2番目に大きな惑星で、最も、平均密度が低く、水よりも軽い。また、大きく美しい環を持つ。\n環は、大小の氷でできており、地球と土星の位置関係で、環の見え方が変わる。\nタイタンという窒素の大気を持つ衛星がある。",
-   {q:"土星の特徴は?",s0:"ガスでできた輪っか",s1:"水に浮く",ans:1,pres:"https://drive.google.com/file/d/177Gsb7eKO9btiZKW-AvhRzq0VWJEI41W/view?usp=drive_link"},10752
+   document.getElementById("sat"),10752
   ],
   ["天王星",28828,51,
     'ギリシャ神話における天空神である"Uranus"（ウラヌス）から名付けられた。\n自転軸が約98°傾いており、横倒しの状態で公転している。青みががって見える理由として、天王星を覆っているガスの層に含まれるメタンが赤い光を吸収することが挙げられる。\n表面温度は-200°以下にもなり、昼夜の気温差はほとんどない。加えて、公転周期が約84年ということから、極点では昼と夜がそれぞれ約42年間続く。',
-    false,30667
+    document.getElementById("ura"),30667
   ],
   ["海王星",45166,50,
    "太陽系の第八惑星で、1864年に発見された惑星である。太陽系の惑星の中では最も外側を約165年かけて公転しいる。\n現在発見されている衛星数は16個であり、有名な衛星にトリトンがある。\n海王星の表面はメタンの赤の光を吸収し、青の光を散乱させる性質によって青く光っているように見えている。\n惑星はここまでですが、太陽系の旅はまだ続きます！",
-   {q:"天王星と海王星が青く見えるのにかかわっている物質は?",s0:"メタン",s1:"ヘリウム",ans:0,pres:"https://drive.google.com/file/d/1uUIF6U8Dt_PyGgKQqxrNk3CzZ-U4rQUu/view?usp=drive_link"},60141
+   document.getElementById("nep"),60141
   ]
 ];
 let scale= location.hash=="#simu"? 2:Number(location.hash.replace("#game-",""));
