@@ -107,25 +107,31 @@
                 document.getElementById("quizes").appendChild(q_dia);
                 q_dia.show();
               }
-              let path=[...Array(des.value[5]).keys()].map((c) => {return move(des.value[1]/scale,c/des.value[5]*360,start)});
-              const mark=L.Marker.movingMarker(path,1000*(des.value[5]-1),{autostart:true,loop:true}).bindPopup(`${des.value[0]} 直径${des.value[2]/scale}cm`);
-              switch(des.value[0]){
-                case "水星":
-                  mark.options.icon=L.icon({iconUrl:"image/Mercury.png",iconSize:[50,50],iconAnchor:[25,25]});break;
-                case "金星":
-                  mark.options.icon=L.icon({iconUrl:"image/Venus.png",iconSize:[50,50],iconAnchor:[25,25]});break;
-                case "地球":
-                  mark.options.icon=L.icon({iconUrl:"image/Earth.png",iconSize:[50,50],iconAnchor:[25,25]});break;
-                case "火星":
-                  mark.options.icon=L.icon({iconUrl:"image/Mars.png",iconSize:[50,50],iconAnchor:[25,25]});break;
-                case "木星":
-                  mark.options.icon=L.icon({iconUrl:"image/Jupyter.png",iconSize:[74,64],iconAnchor:[37,32]});break;
-                case "土星":
-                  mark.options.icon=L.icon({iconUrl:"image/Saturn.png",iconSize:[74,64],iconAnchor:[37,32]});break;
-               case "天王星":
-                  mark.options.icon=L.icon({iconUrl:"image/Uranus.png",iconSize:[74,64],iconAnchor:[37,32]});break;
-               case "海王星":
-                  mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[37,32],iconAnchor:[18.5,16]});break;
+              
+              let mark;
+              if(des.value[5]){
+                let path=[...Array(des.value[5]).keys()].map((c) => {return move(des.value[1]/scale,c/des.value[5]*360,start);});
+                mark=L.Marker.movingMarker(path,1000*(des.value[5]-1),{autostart:true,loop:true}).bindPopup(`${des.value[0]} 直径${des.value[2]/scale}cm`);
+                switch(des.value[0]){
+                  case "水星":
+                    mark.options.icon=L.icon({iconUrl:"image/Mercury.png",iconSize:[50,50],iconAnchor:[25,25]});break;
+                  case "金星":
+                    mark.options.icon=L.icon({iconUrl:"image/Venus.png",iconSize:[50,50],iconAnchor:[25,25]});break;
+                  case "地球":
+                    mark.options.icon=L.icon({iconUrl:"image/Earth.png",iconSize:[50,50],iconAnchor:[25,25]});break;
+                  case "火星":
+                    mark.options.icon=L.icon({iconUrl:"image/Mars.png",iconSize:[50,50],iconAnchor:[25,25]});break;
+                  case "木星":
+                    mark.options.icon=L.icon({iconUrl:"image/Jupyter.png",iconSize:[74,64],iconAnchor:[37,32]});break;
+                  case "土星":
+                    mark.options.icon=L.icon({iconUrl:"image/Saturn.png",iconSize:[74,64],iconAnchor:[37,32]});break;
+                  case "天王星":
+                    mark.options.icon=L.icon({iconUrl:"image/Uranus.png",iconSize:[74,64],iconAnchor:[37,32]});break;
+                  case "海王星":
+                    mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[37,32],iconAnchor:[18.5,16]});break;
+                }
+              }else{
+                mark=L.marker(move(des.value[1]/scale,0,start)).bindPopup(des.value[0]);
               }
               mark.addTo(mymap);
               L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
@@ -191,8 +197,8 @@
       </dialog>
       <dialog id="nep">
         <h1>海王星</h1>
-        <p></p>
-        <iframe>太陽系の第八惑星で、1864年に発見された惑星である。太陽系の惑星の中では最も外側を約165年かけて公転しいる。<br>現在発見されている衛星数は16個であり、有名な衛星にトリトンがある。<br>海王星の表面はメタンの赤の光を吸収し、青の光を散乱させる性質によって青く光っているように見えている。<br>惑星はここまでですが、太陽系の旅はまだ続きます！</iframe>
+        <p>太陽系の第八惑星で、1864年に発見された惑星である。太陽系の惑星の中では最も外側を約165年かけて公転しいる。<br>現在発見されている衛星数は16個であり、有名な衛星にトリトンがある。<br>海王星の表面はメタンの赤の光を吸収し、青の光を散乱させる性質によって青く光っているように見えている。<br>惑星はここまでですが、太陽系の旅はまだ続きます！</p>
+        <iframe></iframe>
       </dialog>
     </div>
   </body>
