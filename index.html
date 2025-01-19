@@ -41,12 +41,12 @@
         
         dist_data[0][4]=document.getElementById("mer");
         dist_data[1][4]=document.getElementById("ven");
-        dist_data[0][4]=document.getElementById("ear");
-        dist_data[0][4]=document.getElementById("mar");
-        dist_data[0][4]=document.getElementById("jup");
-        dist_data[0][4]=document.getElementById("sat");
-        dist_data[0][4]=document.getElementById("ura");
-        dist_data[0][4]=document.getElementById("nep");
+        dist_data[2][4]=document.getElementById("ear");
+        dist_data[3][4]=document.getElementById("mar");
+        dist_data[4][4]=document.getElementById("jup");
+        dist_data[5][4]=document.getElementById("sat");
+        dist_data[6][4]=document.getElementById("ura");
+        dist_data[7][4]=document.getElementById("nep");
         dist_data.forEach(dt=>{
           dt.onclick=function(){console.log(this);this[4].showModal();}.bind(dt);
           dt[4].onclick=function(e){if(e.target.closest('#dlgs') === null) {e.target.close();}};
