@@ -84,7 +84,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
             mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[37,32],iconAnchor:[18.5,16]});break;
         }
       }else{
-        mark=L.marker(move(dt[1]/scale,0,start).on("click",dt.onclick);
+        mark=L.marker(move(dt[1]/scale,0,start)).on("click",dt.onclick);
       }
       mark.addTo(mymap);
       if(simu_st.open){simu_st.close();}
