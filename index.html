@@ -61,7 +61,7 @@
         }else if(location.hash){
           if(scale==2 || scale==20){
             dist_data.splice(3,0,["リュウグウ(平均)",1800,0,"日本の探査機「はやぶさ2」が行った、小惑星です。",document.getElementById("ryu"),555]);
-            dist_data.push(["冥王星(平均)",59250,2.5,"ハートマークがあることで有名な準惑星です。もともと惑星でしたが、2006年に分類が見直されました。",document.getElementById("plu"),90520],["ヘリオポーズ(太陽圏界面)",150000,0,"太陽から出ているプラズマ「太陽風」が到達するのはここまでです。",document.getElementById("her")],["コンプリート!!ボイジャー1号",244000,0,"現在人工物が到達している最遠の距離です。ここまでお疲れさまでした。"document.getElementById("voy")]);
+            dist_data.push(["冥王星(平均)",59250,2.5,"ハートマークがあることで有名な準惑星です。もともと惑星でしたが、2006年に分類が見直されました。",document.getElementById("plu"),90520],["ヘリオポーズ(太陽圏界面)",150000,0,"太陽から出ているプラズマ「太陽風」が到達するのはここまでです。",document.getElementById("her")],["コンプリート!!ボイジャー1号",244000,0,"現在人工物が到達している最遠の距離です。ここまでお疲れさまでした。",document.getElementById("voy")]);
           }
           dist_data.forEach(dt=>{
             dt.onclick=function(){this[4].showModal();}.bind(dt);
