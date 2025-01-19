@@ -72,7 +72,7 @@
               let mark;
               if(des.value[5]){
                 let path=[...Array(des.value[5]).keys()].map((c) => {return move(des.value[1]/scale,c/des.value[5]*360,start);});
-                mark=L.Marker.movingMarker(path,1000*(des.value[5]-1),{autostart:true,loop:true}).bindPopup(`${des.value[0]} 直径${des.value[2]/scale}cm`);
+                mark=L.Marker.movingMarker(path,1000*(des.value[5]-1),{autostart:true,loop:true}).on("click",des.onclick);
                 switch(des.value[0]){
                   case "水星":
                     mark.options.icon=L.icon({iconUrl:"image/Mercury.png",iconSize:[50,50],iconAnchor:[25,25]});break;
@@ -92,7 +92,7 @@
                     mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[37,32],iconAnchor:[18.5,16]});break;
                 }
               }else{
-                mark=L.marker(move(des.value[1]/scale,0,start)).bindPopup(des.value[0]);
+                mark=L.marker(move(des.value[1]/scale,0,start)).on("click",des.onclick);
               }
               mark.addTo(mymap);
               L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
