@@ -39,6 +39,19 @@
           if(mymap){mymap.remove();}
         }else if(menu.open){menu.close();}
         
+        dist_data[0][4]=document.getElementById("mer");
+        dist_data[1][4]=document.getElementById("ven");
+        dist_data[0][4]=document.getElementById("ear");
+        dist_data[0][4]=document.getElementById("mar");
+        dist_data[0][4]=document.getElementById("jup");
+        dist_data[0][4]=document.getElementById("sat");
+        dist_data[0][4]=document.getElementById("ura");
+        dist_data[0][4]=document.getElementById("nep");
+        dist_data.forEach(dt=>{
+          dt.onclick=function(){this[4].showModal();};
+          dt[4].onclick=function(e){if(e.target.closest('#dlgs') === null) {e.target.close();}};
+        });
+        
         if(location.hash=="#simu"){
           navigator.geolocation.getCurrentPosition(
             pos=>{setup([pos.coords.latitude,pos.coords.longitude]);},
