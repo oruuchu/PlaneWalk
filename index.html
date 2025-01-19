@@ -47,12 +47,12 @@
         dist_data[5][4]=document.getElementById("sat");
         dist_data[6][4]=document.getElementById("ura");
         dist_data[7][4]=document.getElementById("nep");
-        dist_data.forEach(dt=>{
-          dt.onclick=function(){this[4].showModal();}.bind(dt);
-          dt[4].onclick=function(e){if(e.target === this) {e.target.close();}}.bind(dt[4]);
-        });
         
         if(location.hash=="#simu"){
+          dist_data.forEach(dt=>{
+            dt.onclick=function(){this[4].showModal();}.bind(dt);
+            dt[4].onclick=function(e){if(e.target === this) {e.target.close();}}.bind(dt[4]);
+          });
           navigator.geolocation.getCurrentPosition(
             pos=>{setup([pos.coords.latitude,pos.coords.longitude]);},
             ()=>{setup([35,135],7);}
@@ -60,9 +60,13 @@
           simu_st.show();
         }else if(location.hash){
           if(scale==2 || scale==20){
-            dist_data.splice(3,0,["リュウグウ(平均)",1800,0,"日本の探査機「はやぶさ2」が行った、小惑星です。",false,555]);
-            dist_data.push(["冥王星(平均)",59250,2.5,"ハートマークがあることで有名な準惑星です。もともと惑星でしたが、2006年に分類が見直されました。",false,90520],["ヘリオポーズ(太陽圏界面)",150000,0,"太陽から出ているプラズマ「太陽風」が到達するのはここまでです。"],["コンプリート!!ボイジャー1号",244000,0,"現在人工物が到達している最遠の距離です。ここまでお疲れさまでした。"]);
+            dist_data.splice(3,0,["リュウグウ(平均)",1800,0,"日本の探査機「はやぶさ2」が行った、小惑星です。",document.getElementById("ryu"),555]);
+            dist_data.push(["冥王星(平均)",59250,2.5,"ハートマークがあることで有名な準惑星です。もともと惑星でしたが、2006年に分類が見直されました。",document.getElementById("plu"),90520],["ヘリオポーズ(太陽圏界面)",150000,0,"太陽から出ているプラズマ「太陽風」が到達するのはここまでです。",document.getElementById("her")],["コンプリート!!ボイジャー1号",244000,0,"現在人工物が到達している最遠の距離です。ここまでお疲れさまでした。"document.getElementById("voy")]);
           }
+          dist_data.forEach(dt=>{
+            dt.onclick=function(){this[4].showModal();}.bind(dt);
+            dt[4].onclick=function(e){if(e.target === this) {e.target.close();}}.bind(dt[4]);
+          });
           alert("ゲームモードでは、通知とGPS、Service Workerを使用しますので、ブラウザの設定をご確認ください。\nまた、iPhoneで通知機能をご利用いただくには、下のメニューより、「ホーム画面に追加」が必要です。\n※アプリを閉じると、追跡はとまりますのでご安心ください");
              
           navigator.geolocation.getCurrentPosition(pos=>{
@@ -137,42 +141,50 @@
       <dialog id="mer">
         <h1>水星</h1>
         <p>太陽に一番近い惑星。クレーターには、主に芸術家の名前がつけられており、日本人でいうと、ヤマダ(山田耕筰)や、リキュウ(千利休)といったクレーターがある。<br>自転が非常にゆっくりで、1日の長さが176日。太陽からの重力の関係で、探査機が到達するのは非常に難しい。</p>
-        <iframe>ただいまクイズ・AR等準備中</iframe>
       </dialog>
       <dialog id="ven">
         <h1>金星</h1>
-        <p></p>
-        <iframe>ただいまクイズ・AR等準備中</iframe>
+        <p>解説・クイズ等準備中</p>
       </dialog>
       <dialog id="ear">
         <h1>地球</h1>
         <p>太陽系の中で唯一、生物の確認がされている天体である。およそ46億年前に誕生し、酸素や水などを蓄えている。自転周期は24時間、公転周期は365日で、地軸が傾いていることから、季節変化なども見られる。衛星として月を伴っていて、潮の満ち引きなどと関わっている。</p>
-        <iframe>ただいまクイズ・AR等準備中</iframe>
       </dialog>
       <dialog id="mar">
         <h1>火星</h1>
-        <p></p>
-        <iframe>ただいまクイズ・AR等準備中</iframe>
+        <p>解説・クイズ等準備中</p>
       </dialog>
       <dialog id="jup">
         <h1>木星</h1>
-        <p></p>
-        <iframe>ただいまクイズ・AR等準備中</iframe>
+        <p>解説・クイズ等準備中</p>
       </dialog>
       <dialog id="sat">
         <h1>土星</h1>
         <p>太陽系で2番目に大きな惑星で、最も、平均密度が低く、水よりも軽い。また、大きく美しい環を持つ。環は、大小の氷でできており、地球と土星の位置関係で、環の見え方が変わる。タイタンという窒素の大気を持つ衛星がある。</p>
-        <iframe>ただいまクイズ・AR等準備中</iframe>
       </dialog>
       <dialog id="ura">
         <h1>天王星</h1>
         <p>ギリシャ神話における天空神である"Uranus"（ウラヌス）から名付けられた。自転軸が約98°傾いており、横倒しの状態で公転している。青みががって見える理由として、天王星を覆っているガスの層に含まれるメタンが赤い光を吸収することが挙げられる。表面温度は-200°以下にもなり、昼夜の気温差はほとんどない。加えて、公転周期が約84年ということから、極点では昼と夜がそれぞれ約42年間続く。</p>
-        <iframe>ただいまクイズ・AR等準備中</iframe>
       </dialog>
       <dialog id="nep">
         <h1>海王星</h1>
         <p>太陽系の第八惑星で、1864年に発見された惑星である。太陽系の惑星の中では最も外側を約165年かけて公転しいる。現在発見されている衛星数は16個であり、有名な衛星にトリトンがある。海王星の表面はメタンの赤の光を吸収し、青の光を散乱させる性質によって青く光っているように見えている。惑星はここまでですが、太陽系の旅はまだ続きます！</p>
-        <iframe>ただいまクイズ・AR等準備中</iframe>
+      </dialog>
+      <dialog id="ryu">
+        <h1>小惑星リュウグウ</h1>
+        <p>解説・クイズ等準備中</p>
+      </dialog>
+      <dialog id="plu">
+        <h1>冥王星</h1>
+        <p>解説・クイズ等準備中</p>
+      </dialog>
+      <dialog id="her">
+        <h1>ヘリオポーズ(太陽圏界面)</h1>
+        <p>解説・クイズ等準備中</p>
+      </dialog>
+      <dialog id="voy">
+        <h1>ボイジャー1号</h1>
+        <p>解説・クイズ等準備中</p>
       </dialog>
     </div>
   </body>
