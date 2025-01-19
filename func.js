@@ -1,4 +1,4 @@
-//惑星名,(1億分の一での)距離,大きさ、解説、クイズ
+//惑星名,(1億分の一での)距離,大きさ、解説、dialog、公転周期
 const dist_data=[
   ["水星",580,5,
    "太陽に一番近い惑星。\nクレーターには、主に芸術家の名前がつけられており、日本人でいうと、ヤマダ(山田耕筰)や、リキュウ(千利休)といったクレーターがある。\n自転が非常にゆっくりで、1日の長さが176日。\n太陽からの重力の関係で、探査機が到達するのは非常に難しい。",
@@ -24,6 +24,8 @@ const dist_data=[
    document.getElementById("nep"),60141
   ]
 ];
+dist_data.forEach(dt=>{dt.onclick=()=>{this[4].showModal();};});
+
 let scale= location.hash=="#simu"? 2:Number(location.hash.replace("#game-",""));
 
 //マップタイルの定義
