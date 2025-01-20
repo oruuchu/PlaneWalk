@@ -51,12 +51,15 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
     while(!scale){scale=toNum(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。"));}
     mymap.remove();
-    start=[e.latlng.lat,e.latlng.lng];
+    start=[
+      e.y? e.y:e.latlng.lat,
+      e.x? e.x:e.latlng.lng
+    ];
     setup(start);
     
-  　const search = new GeoSearch.GeoSearchControl({provider: new GeoSearch.OpenStreetMapProvider(),style: 'bar'});
+  　const search = new GeoSearch.GeoSearchControl({provider: new GeoSearch.OpenStreetMapProvider(),style: 'bar',showMarker: false});
   　mymap.addControl(search);
-    mymap.on('geosearch/showlocation', function(e) {setup([e.x,e.y]);});
+    mymap.on('geosearch/showlocation', arguments.callee);
     
     L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
 
