@@ -56,7 +56,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     
   　const search = new GeoSearch.GeoSearchControl({provider: new GeoSearch.OpenStreetMapProvider(),style: 'bar'});
   　mymap.addControl(search);
-    mymap.on('geosearch/complete', function(e) {setup([e.x,e.y]);});
+    mymap.on('geosearch/showlocation', function(e) {setup([e.x,e.y]);});
     
     L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
 
