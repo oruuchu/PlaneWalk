@@ -51,6 +51,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
     while(!scale){scale=toNum(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。"));}
     mymap.remove();
+    console.log(e);
     start=[
       e.y? e.y:e.latlng.lat,
       e.x? e.x:e.latlng.lng
