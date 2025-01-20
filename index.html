@@ -110,7 +110,7 @@
                     mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[37,32],iconAnchor:[18.5,16]});break;
                 }
               }else{
-                mark=L.marker(move(des.value[1]/scale,0,start)).on("click",des.onclick);
+                mark=L.marker(move(des.value[1]/scale,0,start)).on("click",des.value.onclick);
               }
               mark.addTo(mymap);
               L.circle(start, {radius: des.value[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
@@ -188,6 +188,8 @@
       <dialog id="voy">
         <h1>ボイジャー1号</h1>
         <p>解説・クイズ等準備中</p>
+        <model-viewer src="3Dmodel/Voyager.glb" camera-controls></model-viewer>
+        <small>&copy;NASA</small>
       </dialog>
     </div>
   </body>
