@@ -46,6 +46,9 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
   const ctrl = L.control.layers({"GoogleMap":Gmap,"国土地理院":chiriinn,"OpenStreetMap": OSMtile,"航空写真":ewi}).addTo(mymap);
   mymap.addControl(new L.Control.Fullscreen());
   OSMtile.addTo(mymap); 
+
+  const search = new GeoSearch.GeoSearchControl({provider: new GeoSearch.OpenStreetMapProvider()});
+  mymap.addControl(search);
   
   if(location.hash=="#simu"){mymap.on('click', function(e) {
     scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
