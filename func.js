@@ -53,8 +53,8 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     mymap.remove();
     console.log(e);
     start=[
-      e.latlng.lat? e.latlng.lat:e.location.y,
-      e.latlng.lng? e.latlng.lng:e.location.x
+      e.latlng? e.latlng.lat:e.location.y,
+      e.latlng? e.latlng.lng:e.location.x
     ];
     setup(start);
     
