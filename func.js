@@ -70,7 +70,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
 
     for(dt of dist_data){
-      let circle = L.circle(e.latlng, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
+      let circle = L.circle(start, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
       let mark;
       if(dt[5]){
         let path=[...Array(dt[5]).keys()].map((c) => {return move(dt[1]/scale,c/dt[5]*360,start);});
