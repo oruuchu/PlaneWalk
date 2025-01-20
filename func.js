@@ -46,9 +46,6 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
   const ctrl = L.control.layers({"GoogleMap":Gmap,"国土地理院":chiriinn,"OpenStreetMap": OSMtile,"航空写真":ewi}).addTo(mymap);
   mymap.addControl(new L.Control.Fullscreen());
   OSMtile.addTo(mymap); 
-
-  const search = new GeoSearch.GeoSearchControl({provider: new GeoSearch.OpenStreetMapProvider()});
-  mymap.addControl(search);
   
   if(location.hash=="#simu"){mymap.on('click', function(e) {
     scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
@@ -56,6 +53,11 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     mymap.remove();
     start=[e.latlng.lat,e.latlng.lng];
     setup(start);
+    
+  　const search = new GeoSearch.GeoSearchControl({provider: new GeoSearch.OpenStreetMapProvider(),style: 'bar'});
+  　mymap.addControl(search);
+    mymap.on('geosearch/complete', function(e) {setup([e.x,e.y]);});
+    
     L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
 
     for(dt of dist_data){
