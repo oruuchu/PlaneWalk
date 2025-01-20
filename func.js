@@ -53,12 +53,17 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
     mymap.remove();
     console.log(e);
     start=[
-      e.y? e.y:e.latlng.lat,
-      e.x? e.x:e.latlng.lng
+      e.latlng.lat? e.latlng.lat:e.location.y,
+      e.latlng.lng? e.latlng.lng:e.location.x
     ];
     setup(start);
     
-  　const search = new GeoSearch.GeoSearchControl({provider: new GeoSearch.OpenStreetMapProvider(),style: 'bar',showMarker: false});
+  　const search = new GeoSearch.GeoSearchControl({
+     provider: new GeoSearch.OpenStreetMapProvider(),
+     style: 'bar',
+     showMarker: false,
+     searchLabel:"ここで検索orマップ上をクリックで中心地点指定"
+   });
   　mymap.addControl(search);
     mymap.on('geosearch/showlocation', arguments.callee);
     
