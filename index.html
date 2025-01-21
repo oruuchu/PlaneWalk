@@ -37,8 +37,6 @@
       window.onhashchange=function(){location.reload();};
       window.onload=function() {
         const menu=document.getElementById("menu");
-        const simu_st=document.getElementById("simu_st");
-        const q_dia=document.getElementById("quiz");
         
         if(!location.hash){
           menu.showModal();
@@ -64,7 +62,6 @@
             pos=>{setup([pos.coords.latitude,pos.coords.longitude]);},
             ()=>{setup([35,135],7);}
           );
-          simu_st.show();
         }else if(location.hash){
           if(scale==2 || scale==20){
             dist_data.splice(3,0,["リュウグウ(平均)",1800,0,"日本の探査機「はやぶさ2」が行った、小惑星です。",document.getElementById("ryu"),555]);
@@ -142,8 +139,6 @@
         <option value="#game-200">200億分の1/約0.2kmコース</option>
       </select>
     </dialog>
-    <dialog id="simu_st">クリックで中心地点を指定</dialog>
-    <div id="quizes"></div>
     <div id="dlgs">
       <dialog id="mer">
         <h1>水星</h1>
