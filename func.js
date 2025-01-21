@@ -88,7 +88,6 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
           mark=L.marker(move(dt[1]/scale,0,start)).on("click",dt.onclick);
         }
         mark.addTo(mymap);
-        if(simu_st.open){simu_st.close();}
       }
     };
 
