@@ -47,59 +47,62 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
   mymap.addControl(new L.Control.Fullscreen());
   OSMtile.addTo(mymap); 
   
-  if(location.hash=="#simu"){mymap.on('click', function(e) {
-    scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
-    while(!scale){scale=toNum(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。"));}
-    mymap.remove();
-    console.log(e);
-    start=[
-      e.latlng? e.latlng.lat:e.location.y,
-      e.latlng? e.latlng.lng:e.location.x
-    ];
-    setup(start);
-    
-  　const search = new GeoSearch.GeoSearchControl({
-     provider: new GeoSearch.OpenStreetMapProvider(),
-     style: 'bar',
-     showMarker: false,
-     searchLabel:"ここで検索orマップ上をクリックで中心地点指定"
-   });
-  　mymap.addControl(search);
-    mymap.on('geosearch/showlocation', arguments.callee);
-    
-    L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
-
-    for(dt of dist_data){
-      let circle = L.circle(start, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
-      let mark;
-      if(dt[5]){
-        let path=[...Array(dt[5]).keys()].map((c) => {return move(dt[1]/scale,c/dt[5]*360,start);});
-        mark=L.Marker.movingMarker(path,1000*(dt[5]-1),{autostart:true,loop:true}).on("click",dt.onclick);
-        switch(dt[0]){
-          case "水星":
-            mark.options.icon=L.icon({iconUrl:"image/Mercury.png",iconSize:[50,50],iconAnchor:[25,25]});break;
-          case "金星":
-            mark.options.icon=L.icon({iconUrl:"image/Venus.png",iconSize:[50,50],iconAnchor:[25,25]});break;
-          case "地球":
-            mark.options.icon=L.icon({iconUrl:"image/Earth.png",iconSize:[50,50],iconAnchor:[25,25]});break;
-          case "火星":
-            mark.options.icon=L.icon({iconUrl:"image/Mars.png",iconSize:[50,50],iconAnchor:[25,25]});break;
-          case "木星":
-            mark.options.icon=L.icon({iconUrl:"image/Jupyter.png",iconSize:[74,64],iconAnchor:[37,32]});break;
-          case "土星":
-            mark.options.icon=L.icon({iconUrl:"image/Saturn.png",iconSize:[74,64],iconAnchor:[37,32]});break;
-          case "天王星":
-            mark.options.icon=L.icon({iconUrl:"image/Uranus.png",iconSize:[74,64],iconAnchor:[37,32]});break;
-          case "海王星":
-            mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[37,32],iconAnchor:[18.5,16]});break;
+  if(location.hash=="#simu"){
+    const click=function(e) {
+      scale=toNum(prompt("縮尺を何億分の1にするか入力してください。\n※〇億分の一、の形に変換し、〇の部分の数値を入力してください",scale));
+      while(!scale){scale=toNum(prompt("無効な値です。もう一度、縮尺を何億分の1にするか入力してください。"));}
+      mymap.remove();
+      start=[
+        e.latlng? e.latlng.lat:e.location.y,
+        e.latlng? e.latlng.lng:e.location.x
+      ];
+      setup(start);
+      
+      L.marker(start,{icon:L.icon({iconUrl:"image/Sun.png",iconSize:[74,64],iconAnchor:[37,32]})}).addTo(mymap).bindPopup("太陽 直径"+14/scale+"m");
+      
+      for(dt of dist_data){
+        let circle = L.circle(start, {radius: dt[1]/scale,fill:false,color:"black",weight:1}).addTo(mymap);
+        let mark;
+        if(dt[5]){
+          let path=[...Array(dt[5]).keys()].map((c) => {return move(dt[1]/scale,c/dt[5]*360,start);});
+          mark=L.Marker.movingMarker(path,1000*(dt[5]-1),{autostart:true,loop:true}).on("click",dt.onclick);
+          switch(dt[0]){
+            case "水星":
+              mark.options.icon=L.icon({iconUrl:"image/Mercury.png",iconSize:[50,50],iconAnchor:[25,25]});break;
+            case "金星":
+              mark.options.icon=L.icon({iconUrl:"image/Venus.png",iconSize:[50,50],iconAnchor:[25,25]});break;
+            case "地球":
+              mark.options.icon=L.icon({iconUrl:"image/Earth.png",iconSize:[50,50],iconAnchor:[25,25]});break;
+            case "火星":
+              mark.options.icon=L.icon({iconUrl:"image/Mars.png",iconSize:[50,50],iconAnchor:[25,25]});break;
+            case "木星":
+              mark.options.icon=L.icon({iconUrl:"image/Jupyter.png",iconSize:[74,64],iconAnchor:[37,32]});break;
+            case "土星":
+              mark.options.icon=L.icon({iconUrl:"image/Saturn.png",iconSize:[74,64],iconAnchor:[37,32]});break;
+            case "天王星":
+              mark.options.icon=L.icon({iconUrl:"image/Uranus.png",iconSize:[74,64],iconAnchor:[37,32]});break;
+            case "海王星":
+              mark.options.icon=L.icon({iconUrl:"image/Neptune.png",iconSize:[37,32],iconAnchor:[18.5,16]});break;
+          }
+        }else{
+          mark=L.marker(move(dt[1]/scale,0,start)).on("click",dt.onclick);
         }
-      }else{
-        mark=L.marker(move(dt[1]/scale,0,start)).on("click",dt.onclick);
+        mark.addTo(mymap);
+        if(simu_st.open){simu_st.close();}
       }
-      mark.addTo(mymap);
-      if(simu_st.open){simu_st.close();}
-    }
-  });}else if(location.hash){
+    };
+
+    const search = new GeoSearch.GeoSearchControl({
+      provider: new GeoSearch.OpenStreetMapProvider(),
+      style: 'bar',
+      showMarker: false,
+      searchLabel:"ここで検索orマップ上をクリックで中心地点指定"
+    });
+　  mymap.addControl(search);
+    mymap.on('geosearch/showlocation', click);
+    
+    mymap.on('click', click);
+  }else if(location.hash){
     navigator.serviceWorker.ready.then(e => {
       Notification.requestPermission();
       window.noti=e;
