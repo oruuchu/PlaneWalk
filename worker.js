@@ -1,5 +1,5 @@
 const APP_NAME = "SolarSystemWalk";
-const VERSION = "2.9.2a"; 
+const VERSION = "2.9.3"; 
 const CACHE_NAME = APP_NAME + "_" + VERSION;
 
 const assets = [
