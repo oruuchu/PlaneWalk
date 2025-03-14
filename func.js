@@ -46,6 +46,10 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
   const ctrl = L.control.layers({"GoogleMap":Gmap,"国土地理院":chiriinn,"OpenStreetMap": OSMtile,"航空写真":ewi}).addTo(mymap);
   mymap.addControl(new L.Control.Fullscreen());
   OSMtile.addTo(mymap); 
+
+  L.easyButton('?', function(btn, easyMap){
+    document.getElementById("help").showModal();
+  }).addTo(mymap);
   
   if(location.hash=="#simu"){
     const click=function(e) {
