@@ -47,7 +47,7 @@ function setup(pos,sca=13){//マップのセットアップ(マップ作成・�
   mymap.addControl(new L.Control.Fullscreen());
   OSMtile.addTo(mymap); 
 
-  L.easyButton('?', function(btn, easyMap){
+  L.easyButton('<span>&#x3f;</span>', function(btn, easyMap){
     document.getElementById("help").showModal();
   }).addTo(mymap);
   
