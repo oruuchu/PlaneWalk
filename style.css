@@ -50,3 +50,8 @@ dialog::backdrop{
   background:#fff;
 }
 .pres{visibility:hidden;}
+
+#help{
+  width:90vw;
+  height:90vh;
+}
