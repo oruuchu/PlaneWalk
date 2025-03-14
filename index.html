@@ -37,6 +37,9 @@
       window.onhashchange=function(){location.reload();};
       window.onload=function() {
         const menu=document.getElementById("menu");
+
+        const help_bt=document.getElementById("help");
+        help_bt.onclick=function(e){if(e.target === help_bt) {help_bt.close();}};
         
         if(!location.hash){
           menu.showModal();
@@ -138,6 +141,9 @@
         <option value="#game-20">20億分の1/約2kmコース</option>
         <option value="#game-200">200億分の1/約0.2kmコース</option>
       </select>
+    </dialog>
+    <dialog id="help">
+      <iframe src="https://docs.google.com/document/d/e/2PACX-1vR5dM090EIdtKYROKMVNOUee5eCBETmGCpTdusbrSc_IQt4uIX-ulsExKb1mWz-aYMfOfXW1JM_0K_s/pub?embedded=true"></iframe>
     </dialog>
     <div id="dlgs">
       <dialog id="mer">
