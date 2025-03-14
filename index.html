@@ -91,7 +91,7 @@
           navigator.geolocation.watchPosition(e=>{
             L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
             let speed=distance([previous,[e.coords.latitude,e.coords.longitude]])/(Math.abs((new Date()).getTime()-pre_time) / (60*60*1000))/1000;
-            document.getElementById("speed").tentContent=`時速${speed}km(光速の${speed*scale/10.8}倍)`;
+            document.getElementById("speed").textContent=`時速${speed}km(光速の${speed*scale/10.8}倍)`;
             previous=[e.coords.latitude,e.coords.longitude];
             pre_time=(new Date()).getTime();
             while(des.value[1]/scale<=distance([start,previous])){
