@@ -91,7 +91,7 @@
           navigator.geolocation.watchPosition(e=>{
             L.polyline([previous,[e.coords.latitude,e.coords.longitude]]).addTo(mymap);
             let speed=distance([previous,[e.coords.latitude,e.coords.longitude]])/(Math.abs((new Date()).getTime()-pre_time) / (60*60*1000))/1000;
-            document.getElementById("speed").textContent=`時速${speed}km(光速の${speed*scale/10.8}倍)`;
+            document.getElementById("speed").textContent=`時速${speed.toFixed(1)}km(光速の${(speed*scale/10.8).toFixed(1)}倍)`;
             previous=[e.coords.latitude,e.coords.longitude];
             pre_time=(new Date()).getTime();
             while(des.value[1]/scale<=distance([start,previous])){
@@ -145,6 +145,7 @@
         <option value="#game-20">20億分の1/約2kmコース</option>
         <option value="#game-200">200億分の1/約0.2kmコース</option>
       </select>
+      <button onclick="document.getElementById('help').showModal();">ヘルプ</button>
     </dialog>
     <dialog id="help">
       <iframe src="https://docs.google.com/document/d/e/2PACX-1vR5dM090EIdtKYROKMVNOUee5eCBETmGCpTdusbrSc_IQt4uIX-ulsExKb1mWz-aYMfOfXW1JM_0K_s/pub?embedded=true" width=350 height=650></iframe>
