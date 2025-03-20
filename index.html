@@ -57,6 +57,7 @@
         dist_data[7][4]=document.getElementById("nep");
         
         if(location.hash=="#simu"){
+          document.getElementById("speed").style.display="none";
           dist_data.forEach(dt=>{
             dt.onclick=function(){this[4].showModal();}.bind(dt);
             dt[4].onclick=function(e){if(e.target === this) {e.target.close();}}.bind(dt[4]);
