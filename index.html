@@ -68,10 +68,10 @@
           );
         }else if(location.hash){
           let pre_time=(new Date()).getTime();
-          if(scale==2 || scale==20){
-            dist_data.splice(3,0,["リュウグウ(平均)",1800,0,"日本の探査機「はやぶさ2」が行った、小惑星です。",document.getElementById("ryu"),555]);
-            dist_data.push(["冥王星(平均)",59250,2.5,"ハートマークがあることで有名な準惑星です。もともと惑星でしたが、2006年に分類が見直されました。",document.getElementById("plu"),90520],["ヘリオポーズ(太陽圏界面)",150000,0,"太陽から出ているプラズマ「太陽風」が到達するのはここまでです。",document.getElementById("her")],["コンプリート!!ボイジャー1号",244000,0,"現在人工物が到達している最遠の距離です。ここまでお疲れさまでした。",document.getElementById("voy")]);
-          }
+          
+          dist_data.splice(3,0,["リュウグウ(平均)",1800,0,"日本の探査機「はやぶさ2」が行った、小惑星です。",document.getElementById("ryu"),555]);
+          dist_data.splice(5,0,["小惑星帯",4500,0,"隕石のふるさと",document.getElementById("bel")]);
+          dist_data.push(["冥王星(平均)",59250,2.5,"ハートマークがあることで有名な準惑星です。もともと惑星でしたが、2006年に分類が見直されました。",document.getElementById("plu"),90520],["ヘリオポーズ(太陽圏界面)",150000,0,"太陽から出ているプラズマ「太陽風」が到達するのはここまでです。",document.getElementById("her")],["コンプリート!!ボイジャー1号",244000,0,"現在人工物が到達している最遠の距離です。ここまでお疲れさまでした。",document.getElementById("voy")]);
           dist_data.forEach(dt=>{
             dt.onclick=function(){this[4].showModal();}.bind(dt);
             dt[4].onclick=function(e){if(e.target === this) {e.target.close();}}.bind(dt[4]);
@@ -175,6 +175,11 @@
         <p>スマートフォンで3Dモデル右下のボタンを押すと、3Dモデルを町中に表示・大きさを体感できます!!</p>
         <model-viewer src="3Dmodel/Mars.glb" camera-controls ar></model-viewer>
       </dialog>
+      <dialog id="bel">
+        <h1>小惑星帯</h1>
+        <p>広島隕石のふるさと</p>
+        <a href="https://www.pyonta.city.hiroshima.jp/hiroshimainseki/">広島隕石のAR</a>
+      </dialog>
       <dialog id="jup">
         <h1>木星</h1>
         <p>スマートフォンで3Dモデル右下のボタンを押すと、3Dモデルを町中に表示・大きさを体感できます!!</p>
@@ -183,6 +188,7 @@
       <dialog id="sat">
         <h1>土星</h1>
         <p>太陽系で2番目に大きな惑星で、最も、平均密度が低く、水よりも軽い。また、大きく美しい環を持つ。環は、大小の氷でできており、地球と土星の位置関係で、環の見え方が変わる。タイタンという窒素の大気を持つ衛星がある。</p>
+        <p>AR準備中</p>
       </dialog>
       <dialog id="ura">
         <h1>天王星</h1>
